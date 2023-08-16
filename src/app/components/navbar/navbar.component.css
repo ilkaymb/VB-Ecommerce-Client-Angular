@@ -1,0 +1,12 @@
+.navbar {
+  background: #ffa800;
+  z-index: 999;
+}
+.nav-link {
+  color: white !important;
+}
+.navbar-brand {
+  color: white !important;
+  font-size: 28px;
+  font-weight: bold;
+}
