@@ -1,0 +1,10 @@
+.login-screen {
+  width: 100%;
+  min-height: 100vh;
+  background: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 72px;
+}

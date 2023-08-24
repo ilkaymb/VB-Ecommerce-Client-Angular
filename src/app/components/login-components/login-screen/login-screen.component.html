@@ -1,0 +1,78 @@
+<div class="login-container">
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Kullanıcı Adı</mat-label>
+    <input
+      #nameID
+      matInput
+      type="text"
+      [(ngModel)]="name"
+      (focus)="nameInputFocus($event)"
+      (click)="focusStateFunction(1)"
+    />
+    <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Şifre</mat-label>
+    <input
+      #passwordID
+      matInput
+      [(ngModel)]="password"
+      [type]="hide ? 'password' : 'text'"
+      (focus)="passwordInputFocus($event)"
+      (click)="focusStateFunction(2)"
+    />
+
+    <mat-icon matSuffix>lock</mat-icon>
+  </mat-form-field>
+
+  <div class="bottom-button-area">
+    <div class="bottom-button">
+      <p style="margin: 0; color: white">Sanal Klavye</p>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="showKeyboard()"
+        style="color: white"
+      >
+        <mat-icon style="color: white" matSuffix>keyboard</mat-icon>
+      </button>
+    </div>
+    <div class="bottom-button">
+      <p style="margin: 0; color: white">Şifremi Göster</p>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+        style="color: white"
+        ng-
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="login-button-area">
+    <a
+      href="/kayit"
+      mat-raised-button
+      style="background: #ffa800; width: 180px; padding: 25px 0; color: white"
+    >
+      Kayıt Ol
+    </a>
+
+    <button
+      href="/giris"
+      style="width: 180px; padding: 25px 0"
+      mat-raised-button
+      color="primary"
+      (click)="loginFunction()"
+    >
+      Giriş Yap
+    </button>
+  </div>
+  <p style="color: white; margin-top: 15px">Şifremi Unuttum</p>
+</div>
+
+<div>Alınan Veri: {{ alinanVeri }}</div>
+"name: "{{ nameInputIsFocus }} "password: " {{ passwordInputIsFocus }}

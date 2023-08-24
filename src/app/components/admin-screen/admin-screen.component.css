@@ -1,0 +1,76 @@
+.admin-container {
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px 0;
+  margin: auto;
+}
+
+.admin-card {
+  width: 258px;
+  height: 100%;
+  background-color: white;
+}
+.admin-card img {
+  width: 258px;
+  height: 168px;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: center;
+}
+.admin-card-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-card-title {
+  text-align: center;
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.admin-card-description {
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-bottom {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+}
+
+.admin-card-button {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  width: 50%;
+}
+.delete-button-color {
+  background: #ff2323;
+}
+
+.update-button-color {
+  background: #ffa800;
+}
+.admin-card-price {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #000;
+}

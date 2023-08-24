@@ -1,0 +1,19 @@
+<div class="product-page-screen">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-lg-7 col-md-12 col-sm-12">
+        <img
+          [src]="product.imageUrl"
+          alt="product image"
+          class="product-image"
+        />
+      </div>
+      <div class="col-lg-5 col-md-12 col-sm-12">
+        <h1 class="product-name">{{ product.name }}</h1>
+        <p class="product-price">{{ product.price | currency }}</p>
+
+        <p class="product-description">{{ product.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

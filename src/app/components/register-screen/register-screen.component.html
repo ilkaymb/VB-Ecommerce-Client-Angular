@@ -1,0 +1,66 @@
+<div class="login-container">
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Kullanıcı Adı</mat-label>
+    <input matInput type="text" [(ngModel)]="name" />
+    <mat-icon style="" matSuffix>person</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Şifre</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      [(ngModel)]="password"
+    />
+    <mat-icon style="" matSuffix>lock</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Şifre Tekrar</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      [(ngModel)]="passwordRepeat"
+    />
+    <mat-icon style="" matSuffix>lock</mat-icon>
+  </mat-form-field>
+  <div
+    style="
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 10px 0;
+      color: white;
+    "
+  >
+    <p style="margin: 0">Şifremi Göster</p>
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      style=""
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </div>
+
+  <div class="login-button-area">
+    <a
+      href="/giris"
+      mat-raised-button
+      style="background: #ffa800; width: 180px; padding: 25px 0; color: white"
+    >
+      Giriş Ekranına Dön
+    </a>
+
+    <a
+      href="/giris"
+      style="width: 180px; padding: 25px 0"
+      mat-raised-button
+      color="primary"
+    >
+      Kaydı Tamamla
+    </a>
+  </div>
+</div>

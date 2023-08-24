@@ -13,6 +13,27 @@ import { ProductsComponent } from './containers/products-page/products.component
 import { RegisterPageComponent } from './containers/register-page/register-page.component';
 import { AdminPageComponent } from './containers/admin-page/admin-page.component';
 import { ProductsContainerComponent } from './components/products-components/products-container/products-container.component';
+import { LoginScreenComponent } from './components/login-components/login-screen/login-screen.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import { RegisterScreenComponent } from './components/register-screen/register-screen.component';
+import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductSearchBarComponent } from './components/product-search-bar/product-search-bar.component';
+
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { JsonPipe } from '@angular/common';
+import { ProductPageComponent } from './containers/product-page/product-page.component';
+
+import {MatGridListModule} from '@angular/material/grid-list';
+import { VirtualKeyboardComponent } from './components/virtual-keyboard/virtual-keyboard.component';
+import { UserPageComponent } from './containers/user-page/user-page.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +43,32 @@ import { ProductsContainerComponent } from './components/products-components/pro
     EntranceComponent,
     MainPageComponent,
     LogInPageComponent,
-    ProductsComponent,RegisterPageComponent, AdminPageComponent, ProductsContainerComponent
+    ProductsComponent,
+    RegisterPageComponent, 
+    AdminPageComponent,
+     ProductsContainerComponent,
+     AdminScreenComponent,
+     ProductPageComponent,
+     LoginScreenComponent,
+     RegisterScreenComponent,
+     VirtualKeyboardComponent,
+     UserPageComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,SearchBarComponent, NgbModule,
+    ProductSearchBarComponent,MatGridListModule,MatButtonModule
+,
+
+MatSlideToggleModule,
+MatPaginatorModule,
+JsonPipe,
   ],
   providers: [],
   bootstrap: [AppComponent]
