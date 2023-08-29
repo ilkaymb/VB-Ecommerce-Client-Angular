@@ -1,5 +1,8 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewChildren,Renderer2 ,HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthService} from 'src/services/data.services';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
@@ -7,13 +10,16 @@ import { Router } from '@angular/router';
 
 })
 export class LoginScreenComponent {
-  constructor(private router: Router) {}
   hide = true;
   keyboardValue = false;
   @Input()  name: string = '';
   @Input()  password: string ='';
   @Input() alinanVeri: string = '';
   @Output() showVirtualKeyboard: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output() getElementInput: EventEmitter<HTMLInputElement> = new EventEmitter<HTMLInputElement>();
+
+
 searchedProduct="";
 
 @ViewChild('nameID') nameID!: ElementRef;
@@ -25,53 +31,14 @@ input1Value: string = '';
 input2Value: string = '';
 focusedInput: number = 0; // 0 represents no input focused, 1 for input 1, 2 for input 2
 
-nameInputIsFocus=false;
-passwordInputIsFocus=false;
+  LoginUsers: any;
 
-focusStateFunction(event: number){
-if(event=== 1){
-  this.nameInputIsFocus=true;
-  this.passwordInputIsFocus=false;
-}
-else if(event=== 2){
-  this.nameInputIsFocus=false;
-  this.passwordInputIsFocus=true;
 
-}
-}
 showKeyboard() {
   this.showVirtualKeyboard.emit(!this.keyboardValue);
   this.keyboardValue=!this.keyboardValue;
-  if(this.nameInputIsFocus===true)  {
-    this.nameID.nativeElement.focus();
-this.name=this.alinanVeri;
-
-  }  
-  else if(this.passwordInputIsFocus===true)  {
-    this.passwordID.nativeElement.focus();
-    this.password=this.alinanVeri;
-
-  }
-
-
 } 
 
-
-passwordInputFocus(event: any) {
-  this.password = this.alinanVeri
-    }
-  
-    nameInputFocus(event: any) {
-      this.name = this.alinanVeri
-        }
-      
-
-handleInputFocusChange(inputNumber: number) {
-  this.focusedInput = inputNumber;
-}
-handleInputFocus(inputNumber: number) {
-  this.focusedInput = inputNumber;
-}
 
 handleInputBlur(inputNumber: number) {
   if (this.focusedInput === inputNumber) {
@@ -80,25 +47,65 @@ handleInputBlur(inputNumber: number) {
 }
 
 
+  constructor(private router: Router,private authService: AuthService,private renderer: Renderer2,private cookieService: CookieService) {}
+
+
+  @ViewChild('myInput1') myInput1!: ElementRef;
+  @ViewChild('myInput2') myInput2!: ElementRef;
+ 
+  onInputFocus(input: HTMLInputElement) {
+    input.value = input.value+ this.alinanVeri;
+    this.getElementInput.emit(input);
+
+    console.log(`Input ${input.id} focused`);
+  }
+
+  onInputBlur(input: HTMLInputElement) {
+    console.log(`Input ${input.id} blurred`);
+
+  }
+  
+  onChangeFunction(input: HTMLInputElement) {
+
+    input.value = input.value+ this.alinanVeri;
+
+  }
+user:any={username:"",password:"",roleId:0};
+
    loginFunction() {
-    if(this.name == "admin" && this.password == "12345"){
+    this.authService.login({
+      username: this.name,
+      password: this.password,
+      roleId: 0
+    })
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        if(res.userLoginResponse.roleId==1){
+          alert("Giriş Başarılı. Üye Sayfasına Yönlendiriliyorsunuz.");
+          this.cookieService.set('authToken', res.token);
 
-      alert("Giriş Başarılı. Admin Sayfasına Yönlendiriliyorsunuz.");
-      this.router.navigate(['/admin']);
+          this.router.navigate(['/üye-sayfasi'],{ queryParams: { customer: this.name } });
 
-    }
-    else if(this.name == "user" && this.password == "12345"){
-      alert("Giriş Başarılı. Üye Sayfasına Yönlendiriliyorsunuz.");
-      this.router.navigate(['/']);
+        }
+        else if(res.userLoginResponse.roleId==2){
+          alert("Giriş Başarılı. Admin Sayfasına Yönlendiriliyorsunuz.");
+          this.cookieService.set('authToken', res.token);
 
-    }
-    else{
-      alert("Giriş Başarısız. Lütfen Tekrar Deneyiniz.");
-    }
+          this.router.navigate(['/admin']);
+        }
+      },
+      (err: any) => {
+        console.log("Hatalı Giriş");
+      },
+    );
+  }
+  
+
+
 
 
   }
 
 
 
-}

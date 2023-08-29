@@ -1,15 +1,18 @@
-import { Component, EventEmitter, Output, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Output, AfterViewInit, Input, ElementRef } from '@angular/core';
 import Keyboard from 'simple-keyboard';
+import {CdkDrag, CdkDragHandle} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-virtual-keyboard',
   templateUrl: './virtual-keyboard.component.html',
-  styleUrls: ['./virtual-keyboard.component.css']
+  styleUrls: ['./virtual-keyboard.component.css'],
+  standalone: true,
+  imports: [CdkDrag, CdkDragHandle],
 })
 export class VirtualKeyboardComponent implements AfterViewInit {
   keyboard!: Keyboard;
 
-
+@Input()  selectedElement:HTMLInputElement  | undefined;
 
   value = '';
 
@@ -24,15 +27,27 @@ export class VirtualKeyboardComponent implements AfterViewInit {
   }
 
   onChange = (input: string) => {
-    this.value = input;
-    this.veriGonderildi.emit(this.value);
+
 
     console.log('Input changed', input);
+ 
+
+
   };
 
   onKeyPress = (button: string) => {
-    console.log('Button pressed', button);
+    this.selectedElement?.focus();
+    if(this.selectedElement){
+      this.selectedElement.value=this.selectedElement.value+button
+    }
+    /*  
+    this.selectedElement?.focus();
 
+    this.veriGonderildi.emit(button);
+
+    */
+  console.log("butona basıldı:",button)
+  console.log(this.selectedElement)
 
     /**
      * If you want to handle the shift and caps lock buttons

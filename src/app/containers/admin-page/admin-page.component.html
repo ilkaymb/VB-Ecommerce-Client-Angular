@@ -1,7 +1,7 @@
-<div style="background: #393e46; padding-top: 120px; min-height: 100vh">
-  <div style="margin: auto; text-align: center; color: white">
-    <h1 style="color: white; text-transform: uppercase">Admin Paneli</h1>
-  </div>
-  <app-search-bar></app-search-bar>
-  <app-admin-screen></app-admin-screen>
-</div>
+<div style="margin: auto; text-align: center; color: white"></div>
+<app-admin-screen
+  [currentProducts]="currentProducts"
+  [currentCategory]="currentCategory"
+  [options]="options"
+  [length]="productCount"
+></app-admin-screen>

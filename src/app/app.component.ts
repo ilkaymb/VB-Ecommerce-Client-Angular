@@ -6,7 +6,6 @@ import { Model, TodoItems } from './model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'selam';
 
 
 model = new Model();

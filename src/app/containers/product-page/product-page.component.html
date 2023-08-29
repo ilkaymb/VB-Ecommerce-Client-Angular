@@ -1,18 +1,33 @@
 <div class="product-page-screen">
-  <div class="container">
+  <div class="product-page-container">
     <div class="row g-3">
       <div class="col-lg-7 col-md-12 col-sm-12">
         <img
-          [src]="product.imageUrl"
+          [src]="productModel.image_Path"
           alt="product image"
           class="product-image"
         />
       </div>
-      <div class="col-lg-5 col-md-12 col-sm-12">
-        <h1 class="product-name">{{ product.name }}</h1>
-        <p class="product-price">{{ product.price | currency }}</p>
+      <div class="col-lg-5 col-md-12 col-sm-12 product-info">
+        <div>
+          <h1 class="product-name">{{ productModel.model }}</h1>
+          <p class="product-price">{{ productModel.price | currency }}</p>
+        </div>
 
-        <p class="product-description">{{ product.description }}</p>
+        <p class="product-description">
+          Üretici: <b>{{ productModel.brand }}</b>
+        </p>
+        <p class="product-description">
+          İşlemci: <b>{{ productModel.processor }}</b>
+        </p>
+
+        <p class="product-description">
+          Ram: <b>{{ productModel.ram_Capacity }}</b>
+        </p>
+
+        <p class="product-description">
+          Depolama Kapasitesi: <b>{{ productModel.storage_Capacity }}</b>
+        </p>
       </div>
     </div>
   </div>

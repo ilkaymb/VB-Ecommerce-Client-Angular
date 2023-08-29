@@ -39,7 +39,6 @@
       (click)="hide = !hide"
       [attr.aria-label]="'Hide password'"
       [attr.aria-pressed]="hide"
-      style=""
     >
       <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
@@ -54,13 +53,13 @@
       Giriş Ekranına Dön
     </a>
 
-    <a
-      href="/giris"
+    <button
+      (click)="registerFunction()"
       style="width: 180px; padding: 25px 0"
       mat-raised-button
       color="primary"
     >
       Kaydı Tamamla
-    </a>
+    </button>
   </div>
 </div>

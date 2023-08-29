@@ -3,9 +3,12 @@
   <app-login-screen
     (showVirtualKeyboard)="toggleVirtualKeyboard($event)"
     [alinanVeri]="alinanVeri"
+    (getElementInput)="getElement($event)"
   ></app-login-screen>
   <app-virtual-keyboard
     *ngIf="showVirtualKeyboard"
     (veriGonderildi)="veriyiAl($event)"
+    [selectedElement]="selectedElement"
   ></app-virtual-keyboard>
 </div>
+{{ this.selectedElement }}

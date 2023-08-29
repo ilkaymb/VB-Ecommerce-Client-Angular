@@ -13,28 +13,29 @@
     [options]="options"
     (newSearchEvent)="searchProductFun($event)"
     (newItemEvent)="addItem($event)"
-    (newMessageEvent)="changeMessage($event)"
     (newCurrentCategory)="changeCurrentCategory($event)"
   ></app-product-search-bar>
 
   <div class="product-container">
-    <span [ngSwitch]="getProduction() !== undefined">
+    <span [ngSwitch]="getProduction().length > 0">
       <div class="product-container" *ngSwitchCase="true">
         <div class="product-card" *ngFor="let product of getProduction()">
-          <img src="{{ product.imageUrl }}" alt="{{ product.name }}" />
+          <img src="{{ product.image_Path }}" alt="{{ product.name }}" />
           <div class="product-card-info">
-            <h3 class="product-card-title">{{ product.name }}</h3>
-            <p class="product-card-description">{{ product.description }}</p>
+            <h3 class="product-card-title">{{ product.model }}</h3>
+            <p class="product-card-description">{{ product.brand }}</p>
             <div class="card-bottom">
-              <a
+              <button
                 style="background: #ffa800"
                 mat-flat-button
                 type="button"
                 class="product-card-button"
-                href="/ürün-sayfasi"
+                (click)="
+                  productPageButtonClicked(this.currentCategory, product.id)
+                "
               >
                 Ürünü İncele
-              </a>
+              </button>
               <div class="product-card-price">
                 {{ product.price | currency }}
               </div>

@@ -1,20 +1,80 @@
-<div class="admin-container">
-  <div class="admin-card" *ngFor="let product of products">
-    <img src="{{ product.imageUrl }}" alt="{{ product.name }}" />
-    <div class="admin-card-info">
-      <h3 class="admin-card-title">{{ product.name }}</h3>
-      <p class="admin-card-description">{{ product.description }}</p>
-      <div class="admin-card-price">
-        {{ product.price | currency }}
+<div style="background: #393e46; padding-top: 120px; min-height: 100vh">
+  <div
+    style="
+      margin: auto;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
+    "
+  >
+    <h1 style="font-size: 32px">Admin Sayfası</h1>
+  </div>
+  <app-product-search-bar
+    [options]="options"
+    (newSearchEvent)="searchProductFun($event)"
+    (newItemEvent)="addItem($event)"
+    (newCurrentCategory)="changeCurrentCategory($event)"
+  ></app-product-search-bar>
+
+  <div class="admin-container">
+    <span [ngSwitch]="getProduction().length > 0">
+      <div class="admin-container" *ngSwitchCase="true">
+        <div class="admin-card" *ngFor="let product of getProduction()">
+          <img
+            src="{{ product.image_Path }}"
+            alt="{{ product.name }}"
+            class="admin-card-image"
+          />
+          <div class="admin-card-info">
+            <h3 class="admin-card-title">{{ product.model }}</h3>
+            <p class="admin-card-description">{{ product.brand }}</p>
+            <div class="admin-card-price">
+              {{ product.price | currency }}
+            </div>
+            <div class="card-bottom">
+              <button
+                (click)="
+                  productUpdateButtonClick(this.currentCategory, product.id)
+                "
+                type="button"
+                mat-flat-button
+                class="admin-card-button update-button-color"
+              >
+                Güncelle
+              </button>
+              <button
+                type="button"
+                mat-flat-button
+                class="admin-card-button delete-button-color"
+                (click)="deleteButtonClick(this.currentCategory, product.id)"
+              >
+                Sil
+              </button>
+            </div>
+          </div>
+        </div>
+        <mat-paginator
+          style="width: 100%"
+          #paginator
+          class="demo-paginator"
+          (page)="handlePageEvent($event)"
+          [length]="length"
+          [pageSize]="pageSize"
+          [disabled]="disabled"
+          [showFirstLastButtons]="showFirstLastButtons"
+          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+          [hidePageSize]="hidePageSize"
+          [pageIndex]="pageIndex"
+          aria-label="Select page"
+        >
+        </mat-paginator>
       </div>
-      <div class="card-bottom">
-        <button type="button" class="admin-card-button update-button-color">
-          Güncelle
-        </button>
-        <button type="button" class="admin-card-button delete-button-color">
-          Sil
-        </button>
+      <div *ngSwitchCase="false">
+        <h1 style="width: 100%; color: white">
+          Aradığınız Kategori Bulunamadı
+        </h1>
       </div>
-    </div>
+      <p *ngSwitchDefault></p>
+    </span>
   </div>
 </div>

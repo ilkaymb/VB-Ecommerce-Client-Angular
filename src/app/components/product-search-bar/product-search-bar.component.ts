@@ -8,6 +8,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-product-search-bar',
   templateUrl: './product-search-bar.component.html',
@@ -31,7 +33,6 @@ export class ProductSearchBarComponent implements OnInit {
 
 @Output() newSearchEvent = new EventEmitter<string>();
 @Output() newItemEvent = new EventEmitter<string>();
-@Output() newMessageEvent = new EventEmitter<string>();
 @Output() newCurrentCategory = new EventEmitter<string>();
 
 filterSelect="Bilgisayar"
@@ -40,9 +41,7 @@ searchString=""
 addNewItem(value: string) {
   this.newItemEvent.emit(value);
 }
-changeMessage(message: string) {
-  this.newMessageEvent.emit (message) ;
-}
+
 searchedProductFunction(value:string){
   this.newSearchEvent.emit(value);
 }
@@ -50,10 +49,17 @@ searchedProductFunction(value:string){
 onChange(value: any) {
   this.newSearchEvent.emit(this.searchString);
 }
+constructor(
+  private route: ActivatedRoute,
+  private router: Router) { }
 
 onChangeSelectProduct(value: string) { 
   this.newCurrentCategory.emit(this.filterSelect);
-
+ this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { category: this.filterSelect },
+      queryParamsHandling: 'merge'
+    });
 }
 
   ngOnInit() {

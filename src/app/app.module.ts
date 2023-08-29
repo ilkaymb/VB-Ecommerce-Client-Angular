@@ -34,6 +34,10 @@ import { ProductPageComponent } from './containers/product-page/product-page.com
 import {MatGridListModule} from '@angular/material/grid-list';
 import { VirtualKeyboardComponent } from './components/virtual-keyboard/virtual-keyboard.component';
 import { UserPageComponent } from './containers/user-page/user-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService, EarPhoneService } from 'src/services/data.services';
+import { ProductUpdatePageComponent } from './containers/product-update-page/product-update-page.component';
+import { CookieService } from 'ngx-cookie-service'; // ngx-cookie-service eklemeyi unutmayın
 
 @NgModule({
   declarations: [
@@ -51,14 +55,16 @@ import { UserPageComponent } from './containers/user-page/user-page.component';
      ProductPageComponent,
      LoginScreenComponent,
      RegisterScreenComponent,
-     VirtualKeyboardComponent,
-     UserPageComponent
+     UserPageComponent,
+     ProductUpdatePageComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    VirtualKeyboardComponent,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatInputModule,
@@ -70,7 +76,8 @@ MatSlideToggleModule,
 MatPaginatorModule,
 JsonPipe,
   ],
-  providers: [],
+  providers: [AuthService,CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,8 +6,10 @@
       matInput
       type="text"
       [(ngModel)]="name"
-      (focus)="nameInputFocus($event)"
-      (click)="focusStateFunction(1)"
+      id="nameID"
+      (focus)="onInputFocus(nameID)"
+      (blur)="onInputBlur(nameID)"
+      (change)="onChangeFunction(nameID)"
     />
     <mat-icon matSuffix>person</mat-icon>
   </mat-form-field>
@@ -18,8 +20,9 @@
       matInput
       [(ngModel)]="password"
       [type]="hide ? 'password' : 'text'"
-      (focus)="passwordInputFocus($event)"
-      (click)="focusStateFunction(2)"
+      (focus)="onInputFocus(passwordID)"
+      (blur)="onInputBlur(passwordID)"
+      (change)="onChangeFunction(passwordID)"
     />
 
     <mat-icon matSuffix>lock</mat-icon>
@@ -62,7 +65,6 @@
     </a>
 
     <button
-      href="/giris"
       style="width: 180px; padding: 25px 0"
       mat-raised-button
       color="primary"
@@ -73,6 +75,3 @@
   </div>
   <p style="color: white; margin-top: 15px">Şifremi Unuttum</p>
 </div>
-
-<div>Alınan Veri: {{ alinanVeri }}</div>
-"name: "{{ nameInputIsFocus }} "password: " {{ passwordInputIsFocus }}
