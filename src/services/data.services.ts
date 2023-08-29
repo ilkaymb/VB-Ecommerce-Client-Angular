@@ -31,6 +31,15 @@ export class DataService {
       }
     });
   }
+  updateDataById(productId: any, updatedData: any): Observable<any> {
+    const url = `${this.apiUrl}/${productId}`; // Güncellenecek ürünün URL'sini oluşturun
+  
+    return this.http.put(url, updatedData, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+  }
 }
 
 @Injectable({
@@ -57,6 +66,15 @@ export class EarPhoneService {
   }
   deleteDataById(productId:any): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${productId}`, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+  }
+  updateDataById(productId: any, updatedData: any): Observable<any> {
+    const url = `${this.apiUrl}/${productId}`; // Güncellenecek ürünün URL'sini oluşturun
+  
+    return this.http.put(url, updatedData, {
       headers: {
         'accept': '*/*'
       }

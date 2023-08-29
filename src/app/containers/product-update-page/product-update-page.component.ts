@@ -46,11 +46,12 @@ color:"",
 
   
     productName: string = '';
-
+productId:string="";
     productCategory:string="";
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const productId = params['productId'];
+      this.productId=productId;
       const productCategory = params['productCategory'];
       this.productCategory=productCategory;
       if(productCategory!=null){
@@ -87,4 +88,25 @@ color:"",
     });
   
   }
+
+  updateProduct(){
+    if(this.productCategory=="Bilgisayar"){
+      this.dataService.updateDataById(this.productId,this.computerModel).subscribe((result) => {
+        alert("Ürün güncellendi ");
+        this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
+      });
+    }
+    else if(this.productCategory=="Kulaklık"){
+      /*
+ this.earPhoneService.updateDataById(this.productId,this.earPhoneModel).subscribe((result) => {
+        alert("Ürün güncellendi ");
+
+        this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
+      });
+      */
+      this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
+
+    }
+  }
+
 }
