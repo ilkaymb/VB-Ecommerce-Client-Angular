@@ -5,6 +5,9 @@ import {map, startWith} from 'rxjs/operators';
 import {NgFor, AsyncPipe} from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { LikeService } from 'src/services/data.services';
+import { LocalStorageService } from 'src/services/localStorage.service';
 
 @Component({
   selector: 'app-products-container',
@@ -16,6 +19,7 @@ export class ProductsContainerComponent  implements OnInit {
 searchedProducts:string="";
 
   @Input() currentProducts: any[] = []; // @Input dekoratörü ile gelen veriyi saklamak için dizi
+  @Input() userLikes: any[] = []; 
   @Input()currentCategory:string="Bilgisayar";
   @Input()options:Array<string>=[];
   items = ['item1', 'item2', 'item3', 'item4'];
@@ -41,7 +45,6 @@ searchedProducts:string="";
   filteredOptions!: Observable<string[]>;
 
 
-  
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -87,10 +90,147 @@ searchedProducts:string="";
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-  constructor(private router: Router) {}
+
+  productIdFunction(){
+    if(this.currentCategory=="Bilgisayar"){
+      return 1;
+    }
+    else if(this.currentCategory=="Kulaklık"){
+    return 2;
+    }
+    else{
+      return 0;
+    }
+  }
+
+
+  constructor(private router: Router,private cookieService: CookieService,private likeService: LikeService,private localStorageService: LocalStorageService) {}
 
   productPageButtonClicked(productCategory:any,productId:any){
     this.router.navigate(['/ürün-sayfasi'],{ queryParams: {productCategory:productCategory, productId: productId } });
 
   }
+
+  productLikeButton(productId:any){
+    if( this.cookieService.check('customerToken')){
+      const userId:number=parseInt(this.cookieService.get('userId'));
+
+      const productCategoryId=this.productIdFunction()
+
+this.likeService.checkLike({product_id:productId,customer_id:userId,category_id:productCategoryId}).subscribe((data:any)=>{
+  console.log(data)
+  if(!data){
+
+
+this.likeService.addLike({product_id:productId,customer_id:userId,category_id:productCategoryId}).subscribe((data:any)=>{
+  this.userLikes.push({id:productId})
+  console.log(this.userLikes)
+      console.log(data)
+    } 
+    )
+  }
+  else{
+    this.likeService.removeLike({product_id:productId,customer_id:userId,category_id:productCategoryId}).subscribe((data:any)=>{
+      this.userLikes=this.userLikes.filter((element: any) => {
+        console.log(element.id+" "  +productId)
+        return element.id !== productId;
+      });
+      console.log(data)
+
+    }
+    )
+  }
+})
+    }
+    else if( this.cookieService.check('adminToken')){
+      alert("Admin girişi var Lütfen müşteri girişi yapınız")
+
+    }
+    else{
+      alert("Üye girişi yok Lütfen giriş yapınız")
+    }
+    
+  }
+
+  isSelected(productId: any): boolean {
+    const filteredLikes = this.userLikes.filter((element: any) => {
+      return element.id === productId;
+    });
+  
+    return filteredLikes.length > 0;
+  }
+
+ // Ürünü sepete eklemek için kullanılan metod
+ addToCart(product: any): void {
+  if( this.cookieService.check('customerToken')){
+   // Örnek bir ürün nesnesi
+   const selectedProduct = {
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.image,
+    category:this.currentCategory,
+  };
+
+  // Ürünü sepete ekleyin
+  this.localStorageService.addItemToCart('cart', selectedProduct);
 }
+else if( this.cookieService.check('adminToken')){
+  alert("Admin girişi var Lütfen müşteri girişi yapınız")
+}
+else{
+  alert("Üye girişi yok Lütfen giriş yapınız")
+}
+
+ 
+}
+
+// Ürünü sepette bulunan ürünlerden kaldırmak için kullanılan metod
+removeFromCart(product: any): void {
+  // Ürünü sepetten kaldırın
+  this.localStorageService.removeItemFromCart('cart', product);
+}
+
+cartProducts: any[] = this.localStorageService.getCartItems('cart') || [];
+toggleProductInCart(product: any): void {
+  console.log(product)
+  if( this.cookieService.check('customerToken')){
+    const cartItems = this.localStorageService.getCartItems('cart');
+    const isProductInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isProductInCart) {
+      // Ürün sepette zaten var, bu nedenle kaldırın
+      this.removeFromCart(product);
+      this.cartProducts=this.cartProducts.filter((element: any) => {
+        return element.id !== product.id;
+      });
+    } else {
+      // Ürün sepette yok, bu nedenle ekleyin
+      this.addToCart(product);
+      this.cartProducts.push(product)
+
+    }
+  }
+  else if( this.cookieService.check('adminToken')){
+    alert("Admin girişi var Lütfen müşteri girişi yapınız")
+  }
+  else{
+    alert("Üye girişi yok Lütfen giriş yapınız")
+  }
+
+  // Örnek bir ürün nesnesi
+
+}
+isCartSelected(productId: any): boolean {
+  const filteredCartElements = this.cartProducts.filter((element: any) => {
+    return element.id === productId;
+  });
+
+  return filteredCartElements.length > 0;
+}
+
+}
+
+
+  
+

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -135,5 +135,47 @@ export class CustomerService {
     });
   }
 
+} 
+ @Injectable({
+  providedIn: 'root'
+})
+export class LikeService {
+  private baseUrl = 'https://localhost:7037/Like'; // API adresinizi ve port numaranızı buraya ekleyin
 
+  constructor(private http: HttpClient) { }
+
+  addLike(body: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, body, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+  }
+  removeLike(body: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'accept': '*/*'
+    });
+
+    return this.http.delete(`${this.baseUrl}/remove`, {
+      headers,
+      body: JSON.stringify(body) // Göndermek istediğiniz JSON verisini burada gövde olarak ekliyoruz.
+    });
+  }
+  checkLike(body: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/check-like`, body, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+    
+  }
+  getUserLikes(customer_id: any, category_id: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user-likes/${customer_id}/${category_id}`, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+    
+  }
 }

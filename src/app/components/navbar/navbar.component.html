@@ -38,15 +38,33 @@
           >
         </li>
       </ul>
-      <div *ngIf="hasToken()" style="display: flex">
+      <div *ngIf="hasCustomerToken()" style="display: flex">
         <a class="nav-link px-3" href="/üye-sayfasi">
           <mat-icon color="white">person</mat-icon>Üye Sayfası
+        </a>
+        <a class="nav-link px-3" href="/üye-sayfasi" style="position: relative">
+          <mat-icon color="white">shopping_cart</mat-icon>
+          Sepet
+          <span class="cart-number" color="primary">{{
+            totalCartProduct
+          }}</span>
         </a>
         <button class="nav-link px-3" (click)="deleteToken()">
           <mat-icon color="white">exit_to_app</mat-icon>Çıkış Yap
         </button>
       </div>
-      <div *ngIf="!hasToken()" style="display: flex">
+      <div *ngIf="hasAdminToken()" style="display: flex">
+        <a class="nav-link px-3" href="/admin">
+          <mat-icon color="white">person</mat-icon>Admin Sayfası
+        </a>
+        <button class="nav-link px-3" (click)="deleteToken()">
+          <mat-icon color="white">exit_to_app</mat-icon>Çıkış Yap
+        </button>
+      </div>
+      <div
+        *ngIf="!hasCustomerToken() && !hasAdminToken()"
+        style="display: flex"
+      >
         <a class="nav-link px-3" href="/giris">
           <mat-icon color="white">vpn_key</mat-icon> Giriş Yap</a
         >

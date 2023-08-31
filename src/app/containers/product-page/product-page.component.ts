@@ -13,45 +13,17 @@ constructor(private dataService: DataService,
   private router: Router,
   private earPhoneService:EarPhoneService) {}
 
-  productModel: {
-    brand: string;
-    model: string;
-    image_Path: string;
-    price: number;
-    processor: string;
-    ram_Capacity: number;
-    storage_Capacity: number;
-  }= {
-  brand: "",
-  model:"",
-  image_Path: "",
-  price: 0,
-  processor: "",
-  ram_Capacity: 0,
-  storage_Capacity: 0
-};
 
-earPhoneModel: {
-  brand: string;
-  model: string;
-  image_Path: string;
-  price: number;
-color:string
-}= {
-brand: "",
-model:"",
-image_Path: "",
-price: 0,
-color:""
-};
 
   productName: string = '';
+  productCategory: string = '';
+  productModel:any;
 ngOnInit(): void {
   this.route.queryParams.subscribe(params => {
     const productId = params['productId'];
-    const productCategory = params['productCategory'];
-    if(productCategory!=null){
-      if(productCategory=="Bilgisayar"){
+    this.productCategory = params['productCategory'];
+    if(this.productCategory!=null){
+      if(this.productCategory=="Bilgisayar"){
         if (productId!=null) {
           this.dataService.getDataById(productId).subscribe((result) => {
             this.productModel=result;
@@ -63,7 +35,7 @@ ngOnInit(): void {
           this.router.navigate(['/login']);
         }
       }
-      else if(productCategory=="Kulaklık"){
+      else if(this.productCategory=="Kulaklık"){
         if (productId!=null) {
           this.earPhoneService.getDataById(productId).subscribe((result) => {
             this.productModel=result;

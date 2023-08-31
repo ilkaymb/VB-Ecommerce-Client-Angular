@@ -1,69 +1,98 @@
-<div style="background: #393e46; padding-top: 120px; min-height: 100vh">
-  <div
-    style="
-      margin: auto;
-      text-align: center;
-      color: white;
-      text-transform: uppercase;
-    "
-  >
-    <h1 style="font-size: 32px">Ürünler</h1>
-  </div>
-  <app-product-search-bar
-    [options]="options"
-    (newSearchEvent)="searchProductFun($event)"
-    (newItemEvent)="addItem($event)"
-    (newCurrentCategory)="changeCurrentCategory($event)"
-  ></app-product-search-bar>
+<app-product-search-bar
+  [options]="options"
+  (newSearchEvent)="searchProductFun($event)"
+  (newItemEvent)="addItem($event)"
+  (newCurrentCategory)="changeCurrentCategory($event)"
+></app-product-search-bar>
 
-  <div class="product-container">
-    <span [ngSwitch]="getProduction().length > 0">
-      <div class="product-container" *ngSwitchCase="true">
-        <div class="product-card" *ngFor="let product of getProduction()">
-          <img src="{{ product.image_Path }}" alt="{{ product.name }}" />
-          <div class="product-card-info">
-            <h3 class="product-card-title">{{ product.model }}</h3>
-            <p class="product-card-description">{{ product.brand }}</p>
-            <div class="card-bottom">
-              <button
-                style="background: #ffa800"
-                mat-flat-button
-                type="button"
-                class="product-card-button"
-                (click)="
-                  productPageButtonClicked(this.currentCategory, product.id)
-                "
-              >
-                Ürünü İncele
-              </button>
-              <div class="product-card-price">
-                {{ product.price | currency }}
-              </div>
+<div class="product-container">
+  <span [ngSwitch]="getProduction().length > 0">
+    <div class="product-container" *ngSwitchCase="true">
+      <div class="product-card" *ngFor="let product of getProduction()">
+        <div
+          mat-icon-button
+          matSuffix
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: end;
+            padding: 10px;
+            gap: 5px;
+          "
+        >
+          <button
+            class="card-top-corner-button"
+            (click)="productLikeButton(product.id)"
+            [ngClass]="{ 'selected-button': isSelected(product.id) }"
+          >
+            <mat-icon
+              matSuffix
+              class="card-top-corner-icon"
+              [ngClass]="{ 'selected-icon': isSelected(product.id) }"
+              >favorite_border</mat-icon
+            >
+          </button>
+          <button
+            class="card-top-corner-button"
+            (click)="
+              toggleProductInCart({
+                id: product.id,
+                name: product.model,
+                price: product.price,
+                image: product.image_Path
+              })
+            "
+            [ngClass]="{ 'selected-button': isCartSelected(product.id) }"
+          >
+            <mat-icon
+              class="card-top-corner-icon"
+              [ngClass]="{ 'selected-icon': isCartSelected(product.id) }"
+              >add_shopping_cart</mat-icon
+            >
+          </button>
+        </div>
+
+        <img src="{{ product.image_Path }}" alt="{{ product.name }}" />
+        <div class="product-card-info">
+          <h3 class="product-card-title">{{ product.model }}</h3>
+          <p class="product-card-description">{{ product.brand }}</p>
+          <div class="card-bottom">
+            <button
+              style="background: #ffa800"
+              mat-flat-button
+              type="button"
+              class="product-card-button"
+              (click)="
+                productPageButtonClicked(this.currentCategory, product.id)
+              "
+            >
+              Ürünü İncele
+            </button>
+            <div class="product-card-price">
+              {{ product.price | currency }}
             </div>
           </div>
         </div>
-        <mat-paginator
-          style="width: 100%"
-          #paginator
-          class="demo-paginator"
-          (page)="handlePageEvent($event)"
-          [length]="length"
-          [pageSize]="pageSize"
-          [disabled]="disabled"
-          [showFirstLastButtons]="showFirstLastButtons"
-          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-          [hidePageSize]="hidePageSize"
-          [pageIndex]="pageIndex"
-          aria-label="Select page"
-        >
-        </mat-paginator>
       </div>
-      <div *ngSwitchCase="false">
-        <h1 style="width: 100%; color: white">
-          Aradığınız Kategori Bulunamadı
-        </h1>
-      </div>
-      <p *ngSwitchDefault></p>
-    </span>
-  </div>
+      <mat-paginator
+        style="width: 100%"
+        #paginator
+        class="demo-paginator"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [disabled]="disabled"
+        [showFirstLastButtons]="showFirstLastButtons"
+        [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [hidePageSize]="hidePageSize"
+        [pageIndex]="pageIndex"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+    <div *ngSwitchCase="false">
+      <h1 style="width: 100%; color: white">Aradığınız Kategori Bulunamadı</h1>
+    </div>
+    <p *ngSwitchDefault></p>
+  </span>
 </div>

@@ -97,14 +97,13 @@ productId:string="";
       });
     }
     else if(this.productCategory=="Kulaklık"){
-      /*
+      
  this.earPhoneService.updateDataById(this.productId,this.earPhoneModel).subscribe((result) => {
         alert("Ürün güncellendi ");
 
         this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
       });
-      */
-      this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
+      
 
     }
   }

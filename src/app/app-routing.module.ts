@@ -8,6 +8,7 @@ import { AdminPageComponent } from './containers/admin-page/admin-page.component
 import { ProductPageComponent } from './containers/product-page/product-page.component';
 import { UserPageComponent } from './containers/user-page/user-page.component';
 import { ProductUpdatePageComponent } from './containers/product-update-page/product-update-page.component';
+import { CartPageComponent } from './containers/cart-page/cart-page.component';
 const routes: Routes = [ { path: '', component: MainPageComponent },
 { path: 'giris', component: LogInPageComponent },
 { path: 'kayit', component: RegisterPageComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [ { path: '', component: MainPageComponent },
 { path: 'admin', component: AdminPageComponent },
 { path: 'ürün-sayfasi', component: ProductPageComponent},
 {path: 'üye-sayfasi', component: UserPageComponent  },
-{path: 'ürün-güncelle', component: ProductUpdatePageComponent  }];
+{path: 'ürün-güncelle', component: ProductUpdatePageComponent  },
+{path: 'sepet', component: CartPageComponent  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

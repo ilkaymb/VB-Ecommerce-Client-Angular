@@ -38,6 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService, EarPhoneService } from 'src/services/data.services';
 import { ProductUpdatePageComponent } from './containers/product-update-page/product-update-page.component';
 import { CookieService } from 'ngx-cookie-service'; // ngx-cookie-service eklemeyi unutmayın
+import { Deneme } from 'src/services/auth.servives';
+import { CartPageComponent } from './containers/cart-page/cart-page.component';
+import { CartTableComponent } from './components/cart-table/cart-table.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { CookieService } from 'ngx-cookie-service'; // ngx-cookie-service ekleme
      LoginScreenComponent,
      RegisterScreenComponent,
      UserPageComponent,
-     ProductUpdatePageComponent
+     ProductUpdatePageComponent,
+     CartPageComponent,
+     
 
   ],
   imports: [
@@ -69,14 +74,14 @@ import { CookieService } from 'ngx-cookie-service'; // ngx-cookie-service ekleme
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,SearchBarComponent, NgbModule,
-    ProductSearchBarComponent,MatGridListModule,MatButtonModule
+    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent
 ,
 
 MatSlideToggleModule,
 MatPaginatorModule,
 JsonPipe,
   ],
-  providers: [AuthService,CookieService
+  providers: [AuthService,CookieService,Deneme
   ],
   bootstrap: [AppComponent]
 })

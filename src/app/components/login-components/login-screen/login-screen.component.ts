@@ -83,15 +83,18 @@ user:any={username:"",password:"",roleId:0};
         console.log(res);
         if(res.userLoginResponse.roleId==1){
           alert("Giriş Başarılı. Üye Sayfasına Yönlendiriliyorsunuz.");
-          this.cookieService.set('authToken', res.token);
+          this.cookieService.set('customerToken', res.token);
+          this.cookieService.set('userId', res.userLoginResponse.id); // userId'i çereze ekleyin
+          this.cookieService.set('userName', this.name); // userName'i çereze ekleyin
 
-          this.router.navigate(['/üye-sayfasi'],{ queryParams: { customer: this.name } });
+          this.router.navigate(['/üye-sayfasi']);
 
         }
         else if(res.userLoginResponse.roleId==2){
           alert("Giriş Başarılı. Admin Sayfasına Yönlendiriliyorsunuz.");
-          this.cookieService.set('authToken', res.token);
-
+          this.cookieService.set('adminToken', res.token);
+          this.cookieService.set('userId', res.userLoginResponse.id); // userId'i çereze ekleyin
+          this.cookieService.set('userName', this.name); // userName'i çereze ekleyin
           this.router.navigate(['/admin']);
         }
       },
