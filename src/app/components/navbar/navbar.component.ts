@@ -9,8 +9,11 @@ import { LocalStorageService } from 'src/services/localStorage.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  isNavbarCollapsed=true;
   constructor(private cookieService: CookieService,private router: Router,private localStorageService: LocalStorageService) {}
+
+  isNavbarCollapsed=true;
+  totalCartProduct:number=this.localStorageService.getCartItems('cart').length;
+
 
   hasCustomerToken(): boolean {
     return this.cookieService.check('customerToken'); // 'customerToken' isimli çerezin varlığını kontrol ediyoruz
@@ -18,12 +21,6 @@ export class NavbarComponent {
   hasAdminToken(): boolean {
     return this.cookieService.check('adminToken'); // 'adminToken' isimli çerezin varlığını kontrol ediyoruz
   }
-
-totalCartProduct:number=this.localStorageService.getCartItems('cart').length;
-
-
-
-
 
    deleteToken() {
     if(this.cookieService.check('customerToken')) {

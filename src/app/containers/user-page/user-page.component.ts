@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { CustomerService, LikeService } from 'src/services/data.services';
+import { LikeService } from 'src/services/data.services';
 
 @Component({
   selector: 'app-user-page',
@@ -9,16 +9,17 @@ import { CustomerService, LikeService } from 'src/services/data.services';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent {
-  constructor(private customerService: CustomerService,
-    private route: ActivatedRoute,
-    private router: Router,private likeService:LikeService,private cookieService: CookieService) {}
+  constructor(private route: ActivatedRoute,
+    private likeService:LikeService,
+    private cookieService: CookieService) {}
  
     customerName: string = '';
     productCategoryId:number=1;
     userId:number=parseInt(this.cookieService.get('userId'));
     options: string[] = ['Bilgisayar', 'Kulaklık', 'Playstation','Xbox'];
-
     currentCategory="Bilgisayar"
+    userLikes:any;
+
     productIdFunction(category:string){
       if(category=="Bilgisayar"){
         return 1;
@@ -30,7 +31,6 @@ export class UserPageComponent {
         return 0;
       }
     }  
-   userLikes:any;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -40,9 +40,6 @@ export class UserPageComponent {
         this.likeService.getUserLikes(this.userId,this.productCategoryId).subscribe((result) => {
          this.userLikes=result;
         });
-      
-     
-      
     });
 
 

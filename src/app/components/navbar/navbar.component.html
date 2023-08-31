@@ -24,7 +24,7 @@
         <li class="nav-item px-3">
           <a class="nav-link active" aria-current="page" href="/">
             <mat-icon color="white">home</mat-icon>
-            Ana Sayfa</a
+            {{ "NavbarMenuItem1" | translate }}</a
           >
         </li>
         <li class="nav-item px-3">
@@ -34,13 +34,14 @@
             [queryParams]="{ category: 'Bilgisayar' }"
           >
             <mat-icon color="white">laptop</mat-icon>
-            Ürünler</a
+            {{ "NavbarMenuItem2" | translate }}</a
           >
         </li>
       </ul>
       <div *ngIf="hasCustomerToken()" style="display: flex">
         <a class="nav-link px-3" href="/üye-sayfasi">
-          <mat-icon color="white">person</mat-icon>Üye Sayfası
+          <mat-icon color="white">person</mat-icon
+          >{{ "NavbarCustomerItem" | translate }}
         </a>
         <a class="nav-link px-3" href="/üye-sayfasi" style="position: relative">
           <mat-icon color="white">shopping_cart</mat-icon>
@@ -50,15 +51,18 @@
           }}</span>
         </a>
         <button class="nav-link px-3" (click)="deleteToken()">
-          <mat-icon color="white">exit_to_app</mat-icon>Çıkış Yap
+          <mat-icon color="white">exit_to_app</mat-icon>
+          {{ "ExitNavbar" | translate }}
         </button>
       </div>
       <div *ngIf="hasAdminToken()" style="display: flex">
         <a class="nav-link px-3" href="/admin">
-          <mat-icon color="white">person</mat-icon>Admin Sayfası
+          <mat-icon color="white">person</mat-icon>
+          {{ "NavbarAdminItem" | translate }}
         </a>
         <button class="nav-link px-3" (click)="deleteToken()">
-          <mat-icon color="white">exit_to_app</mat-icon>Çıkış Yap
+          <mat-icon color="white">exit_to_app</mat-icon>
+          {{ "ExitNavbar" | translate }}
         </button>
       </div>
       <div
@@ -66,7 +70,8 @@
         style="display: flex"
       >
         <a class="nav-link px-3" href="/giris">
-          <mat-icon color="white">vpn_key</mat-icon> Giriş Yap</a
+          <mat-icon color="white">vpn_key</mat-icon>
+          {{ "LoginNavbar" | translate }}</a
         >
       </div>
     </div>

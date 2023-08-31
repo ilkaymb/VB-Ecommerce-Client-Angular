@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewChildren,Renderer2 ,HostListener } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild,Renderer2  } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthService} from 'src/services/data.services';
 import { CookieService } from 'ngx-cookie-service';

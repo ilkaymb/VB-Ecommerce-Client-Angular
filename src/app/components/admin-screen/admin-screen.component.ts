@@ -98,14 +98,8 @@ export class AdminScreenComponent {
   @Input() currentProducts: any[] = []; // @Input dekoratörü ile gelen veriyi saklamak için dizi
   @Input()currentCategory:string="Bilgisayar";
   @Input()options:Array<string>=[];
-  items = ['item1', 'item2', 'item3', 'item4'];
   searchedProduct=""
 
-  addItem(newItem: string) {
-    this.items.push(newItem);
-  }
-
-  
   searchProductFun(newSearch:string){
       this.searchedProduct=newSearch;
     
@@ -119,8 +113,6 @@ export class AdminScreenComponent {
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
 
-
-  
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -167,8 +159,7 @@ export class AdminScreenComponent {
     }
   }
   constructor(private dataService: DataService,private ear:EarPhoneService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+private router: Router) { }
 
   productUpdateButtonClick(productCategory:any,productId:any){
     this.router.navigate(['/ürün-güncelle'],{ queryParams: {productCategory:productCategory, productId: productId } });

@@ -41,7 +41,10 @@ import { CookieService } from 'ngx-cookie-service'; // ngx-cookie-service ekleme
 import { Deneme } from 'src/services/auth.servives';
 import { CartPageComponent } from './containers/cart-page/cart-page.component';
 import { CartTableComponent } from './components/cart-table/cart-table.component';
-
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +77,14 @@ import { CartTableComponent } from './components/cart-table/cart-table.component
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,SearchBarComponent, NgbModule,
-    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent
+    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
 ,
 
 MatSlideToggleModule,
@@ -86,3 +96,7 @@ JsonPipe,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// required for AOT compilation
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

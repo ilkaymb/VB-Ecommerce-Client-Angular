@@ -15,20 +15,12 @@ import { LocalStorageService } from 'src/services/localStorage.service';
   styleUrls: ['./products-container.component.css']
 })
 export class ProductsContainerComponent  implements OnInit {
-
-searchedProducts:string="";
-
+  searchedProducts:string="";
   @Input() currentProducts: any[] = []; // @Input dekoratörü ile gelen veriyi saklamak için dizi
   @Input() userLikes: any[] = []; 
   @Input()currentCategory:string="Bilgisayar";
   @Input()options:Array<string>=[];
-  items = ['item1', 'item2', 'item3', 'item4'];
   searchedProduct=""
-
-  addItem(newItem: string) {
-    this.items.push(newItem);
-  }
-
 
   
   searchProductFun(newSearch:string){
@@ -61,12 +53,10 @@ searchedProducts:string="";
   pageSize = 16;
   pageIndex = 0;
   pageSizeOptions = [16, 24, 32];
-
   hidePageSize = false;
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   disabled = false;
-
   pageEvent: PageEvent | undefined;
 
   getProduction(){

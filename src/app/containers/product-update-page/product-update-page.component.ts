@@ -10,44 +10,15 @@ export class ProductUpdatePageComponent {
 
   constructor(private dataService: DataService,
     private route: ActivatedRoute,
-    private router: Router,private earPhoneService:EarPhoneService) {}
-    productModel:any;
-    computerModel: {
-      brand: string;
-      model: string;
-      image_Path: string;
-      price: number;
-      processor: string;
-      ram_Capacity: number;
-      storage_Capacity: number;
-    }= {
-    brand: "",
-    model:"",
-    image_Path: "",
-    price: 0,
-    processor: "",
-    ram_Capacity: 0,
-    storage_Capacity: 0
-  };
-  earPhoneModel: {
-    brand: string;
-    model: string;
-    image_Path: string;
-    price: number;
+    private router: Router,
+    private earPhoneService:EarPhoneService) {}
 
-   color:string;
-  }= {
-  brand: "",
-  model:"",
-  image_Path: "",
-  price: 0,
-color:"",
-};
-
-  
     productName: string = '';
-productId:string="";
+    productId:string="";
     productCategory:string="";
+    productModel:any;
+  
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const productId = params['productId'];
@@ -58,11 +29,8 @@ productId:string="";
         if(productCategory=="Bilgisayar"){
           if (productId!=null) {
             this.dataService.getDataById(productId).subscribe((result) => {
-              this.computerModel=result;
               this.productName=result.model;
-              this.productModel=this.computerModel;
-
-              console.log(this.productModel);
+              this.productModel=result;
             });
           }
           else{
@@ -72,10 +40,8 @@ productId:string="";
         else if(productCategory=="Kulaklık"){
           if (productId!=null) {
             this.earPhoneService.getDataById(productId).subscribe((result) => {
-              this.earPhoneModel=result;
-              this.productModel=this.earPhoneModel;
+              this.productModel=result;
               this.productName=result.model;
-              console.log(this.productModel);
             });
           }
           else{
@@ -83,29 +49,20 @@ productId:string="";
           }
         }
       }
-  
-  
     });
-  
   }
-
   updateProduct(){
     if(this.productCategory=="Bilgisayar"){
-      this.dataService.updateDataById(this.productId,this.computerModel).subscribe((result) => {
+      this.dataService.updateDataById(this.productId,this.productModel).subscribe((result) => {
         alert("Ürün güncellendi ");
         this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
       });
     }
     else if(this.productCategory=="Kulaklık"){
-      
- this.earPhoneService.updateDataById(this.productId,this.earPhoneModel).subscribe((result) => {
+        this.earPhoneService.updateDataById(this.productId,this.productModel).subscribe((result) => {
         alert("Ürün güncellendi ");
-
         this.router.navigate(['/admin'],{ queryParams: { category: this.productCategory } });
       });
-      
-
     }
   }
-
 }

@@ -10,14 +10,12 @@ import { AuthService } from 'src/services/data.services';
 
 })
 export class RegisterScreenComponent {
-  hide = true;
   constructor(private router: Router,private authService:AuthService) {}
 
+  hide = true;
   name: string = '';
   password: number | undefined;
   passwordRepeat: number | undefined;
-
-
   
   registerFunction() {
     if (this.password !== this.passwordRepeat) {
@@ -45,14 +43,7 @@ export class RegisterScreenComponent {
           console.error(err);
           alert("Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin."+err.message);
         }
-      );
-
-      
-      
-      
-      
+      );   
     }
   }
-  
-  
 }

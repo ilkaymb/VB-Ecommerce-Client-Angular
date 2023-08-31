@@ -30,7 +30,6 @@ export class ProductSearchBarComponent implements OnInit {
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
   @Input()options:Array<string>=[];
-
 @Output() newSearchEvent = new EventEmitter<string>();
 @Output() newItemEvent = new EventEmitter<string>();
 @Output() newCurrentCategory = new EventEmitter<string>();

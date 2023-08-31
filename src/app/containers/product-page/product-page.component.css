@@ -56,10 +56,18 @@
   height: 50px;
   border-radius: 5px;
   border: none;
-  background-color: rgb(230, 130, 24);
-  color: #eeeeee;
+  color: black;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+.selected-button {
+  background-color: #ffa800 !important; /* Seçili ürünün rengini özelleştirin */
+  color: white !important;
+  /* Diğer özelleştirmeleri burada yapabilirsiniz */
+}
+.selected-icon {
+  color: #ffffffe5 !important; /* Seçili ürünün rengini özelleştirin */
+  /* Diğer özelleştirmeleri burada yapabilirsiniz */
 }

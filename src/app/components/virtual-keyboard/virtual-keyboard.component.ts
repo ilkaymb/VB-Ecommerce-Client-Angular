@@ -13,42 +13,18 @@ export class VirtualKeyboardComponent implements AfterViewInit {
   keyboard!: Keyboard;
 
 @Input()  selectedElement:HTMLInputElement  | undefined;
-
   value = '';
-
-
-
   @Output() veriGonderildi: EventEmitter<string> = new EventEmitter<string>();
   ngAfterViewInit() {
     this.keyboard = new Keyboard({
-      onChange: input => this.onChange(input),
       onKeyPress: button => this.onKeyPress(button)
     });
   }
-
-  onChange = (input: string) => {
-
-
-    console.log('Input changed', input);
- 
-
-
-  };
-
   onKeyPress = (button: string) => {
     this.selectedElement?.focus();
     if(this.selectedElement){
       this.selectedElement.value=this.selectedElement.value+button
     }
-    /*  
-    this.selectedElement?.focus();
-
-    this.veriGonderildi.emit(button);
-
-    */
-  console.log("butona basıldı:",button)
-  console.log(this.selectedElement)
-
     /**
      * If you want to handle the shift and caps lock buttons
      */

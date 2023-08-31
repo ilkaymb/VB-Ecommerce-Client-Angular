@@ -37,14 +37,33 @@
           </p>
         </div>
         <div class="button-area">
-          <button style="width: 50%" mat-raised-button class="product-button">
-            <mat-icon matSuffix class="card-top-corner-icon"
+          <button
+            (click)="productLikeButton(productModel.id)"
+            style="width: 50%"
+            mat-raised-button
+            class="product-button"
+            [ngClass]="{ 'selected-button': isSelected(productModel.id) }"
+          >
+            <mat-icon
+              (click)="toggleProductInCart()"
+              matSuffix
+              [ngClass]="{ 'selected-icon': isSelected(productModel.id) }"
               >favorite_border</mat-icon
             >
             Beğen
           </button>
-          <button style="width: 50%" mat-raised-button class="product-button">
-            <mat-icon class="card-top-corner-icon">add_shopping_cart</mat-icon>
+          <button
+            (click)="toggleProductInCart()"
+            style="width: 50%"
+            mat-raised-button
+            class="product-button"
+            [ngClass]="{ 'selected-button': isCartSelected(productModel.id) }"
+          >
+            <mat-icon
+              matSuffix
+              [ngClass]="{ 'selected-icon': isCartSelected(productModel.id) }"
+              >add_shopping_cart</mat-icon
+            >
             Sepete Ekle
           </button>
         </div>

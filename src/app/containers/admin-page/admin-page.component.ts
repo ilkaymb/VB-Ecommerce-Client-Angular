@@ -11,16 +11,13 @@ import { Router } from '@angular/router';
   
 })
 export class AdminPageComponent implements OnInit{
+  constructor(private dataService: DataService,
+    private ear:EarPhoneService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   options: string[] = ['Bilgisayar', 'Kulaklık', 'Playstation','Xbox'];
   currentCategory: string="Bilgisayar";
-
-
- data: any; // Verileri saklayacak değişken
-
- constructor(private dataService: DataService,private ear:EarPhoneService,
-   private route: ActivatedRoute,
-   private router: Router) { }
  currentProducts:any;
  productCount:any;
 

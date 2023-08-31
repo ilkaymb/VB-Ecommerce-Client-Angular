@@ -134,12 +134,12 @@
   background-color: white;
 }
 .card-top-corner-button:hover {
-  border-color: #c7850096;
+  border-color: #ffa800;
   transition: 0.3s ease;
   color: #c78500 !important;
 }
 .card-top-corner-button:hover .card-top-corner-icon {
-  color: #c78500e5;
+  color: #ffa800;
   transition: 0.3s ease;
 }
 .card-top-corner-icon {
@@ -148,7 +148,7 @@
   margin-top: 5px;
 }
 .selected-button {
-  background-color: #c7850096 !important; /* Seçili ürünün rengini özelleştirin */
+  background-color: #ffa800 !important; /* Seçili ürünün rengini özelleştirin */
   /* Diğer özelleştirmeleri burada yapabilirsiniz */
 }
 .selected-icon {
