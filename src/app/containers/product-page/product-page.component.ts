@@ -22,7 +22,6 @@ export class ProductPageComponent {
   productCategory: string = '';
   productModel:any;
   userLikes:any;
-  currentCategory: string="";
   userId:number=0;
   productCategoryId:number=0;
   productId:any;
@@ -42,53 +41,52 @@ export class ProductPageComponent {
     }
   }  
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const productId = params['productId'];
-      this.productId = productId;
       const productCategory = params['productCategory'];
-      this.productCategory = productCategory;
-      this.productCategoryId = this.productIdFunction(productCategory); // Değiştirildi
+      this.productCategoryId = this.productIdFunction(productCategory);
+      this.productCategory=productCategory;
   
-      if (productCategory == "Bilgisayar") { // Değiştirildi
-        if (productId != null) {
-          this.dataService.getDataById(productId).subscribe((result) => {
-            this.productModel = result;
-            this.productName = result.model;
-            if(this.cookieService.check('customerToken')){
-              this.userId=parseInt(this.cookieService.get('userId'));
-            this.likeService.getUserLikes(this.userId,this.productCategoryId).subscribe((result) => {        
-                this.userLikes=result;
-            });
-          }
-          else{
-            this.userLikes=[]
-          }
-          });
+      if (productId != null) {
+        if (productCategory === 'Bilgisayar') {
+          this.getDataAndSetProduct('computerService', productId);
+        } else if (productCategory === 'Kulaklık') {
+          this.getDataAndSetProduct('earPhoneService', productId);
         } else {
-          this.router.navigate(['/login']);
+          // Bilinmeyen bir kategori durumu veya başka bir işlem yapılabilir.
         }
-      } else if (productCategory == "Kulaklık") { // Değiştirildi
-        if (productId != null) {
-          this.earPhoneService.getDataById(productId).subscribe((result) => {
-            this.productModel = result;
-            this.productName = result.model;
-            console.log(this.productModel);
-            if(this.cookieService.check('customerToken')){
-              this.userId=parseInt(this.cookieService.get('userId'));        
-            this.likeService.getUserLikes(this.userId,this.productCategoryId).subscribe((result) => {
-                this.userLikes=result;
-            });
-          }
-          else{
-            this.userLikes=[]
-          }
-          });
-        } else {
-          this.router.navigate(['/login']);
-        }
+      } else {
+        this.router.navigate(['/login']);
       }
     });
+    this.localStorageService.getCartItemsObservable().subscribe((items) => {
+      this.cartProducts=items;
+    });
+  }
+  private services: { [key: string]: any } = {
+    computerService: this.dataService,
+    earPhoneService: this.earPhoneService,
+  };
+  
+  private getDataAndSetProduct(serviceName: string, productId: any): void {
+    const service = this.services[serviceName];
+  
+    if (service) {
+      service.getDataById(productId).subscribe((result:any) => {
+        this.productModel = result;
+        this.productName = result.model;
+  
+        if (this.cookieService.check('customerToken')) {
+          this.userId = parseInt(this.cookieService.get('userId'));
+          this.likeService.getUserLikes(this.userId, this.productCategoryId).subscribe((result) => {
+            this.userLikes = result;
+          });
+        } else {
+          this.userLikes = [];
+        }
+      });
+    }
   }
 
 isSelected(productId: any): boolean {
@@ -153,9 +151,10 @@ else{
 }
 
 isCartSelected(productId: any): boolean {
+  
 const filteredCartElements = this.cartProducts.filter((element: any) => {
-  console.log(element.id+" "  +this.productModel.id)
-  return element.id === this.productModel.id;
+  console.log(element.id+" "  +productId)
+  return element.id === productId;
 });
 
 return filteredCartElements.length > 0;

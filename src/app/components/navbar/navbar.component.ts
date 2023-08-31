@@ -13,11 +13,16 @@ export class NavbarComponent {
   constructor(private cookieService: CookieService,private router: Router,private localStorageService: LocalStorageService,    public translate: TranslateService
     ) {translate.addLangs(['tr','en' ]);
   translate.setDefaultLang('tr');}
+  cartItems: any[] = [];
 
   isNavbarCollapsed=true;
-  totalCartProduct:number=this.localStorageService.getCartItems('cart').length;
+  totalCartProduct:number=this.localStorageService.getCount('cart');
 
-
+  ngOnInit(): void {
+    this.localStorageService.getCartItemsObservable().subscribe((items) => {
+      this.totalCartProduct=items.length;
+    });
+  }
   hasCustomerToken(): boolean {
     return this.cookieService.check('customerToken'); // 'customerToken' isimli çerezin varlığını kontrol ediyoruz
   }
