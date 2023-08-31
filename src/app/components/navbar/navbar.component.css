@@ -17,14 +17,16 @@
 }
 .cart-number {
   position: relative;
-
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: black;
+  bottom: 8px;
+  right: 5px;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 24px;
+  height: 24px;
   font-size: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 500;
 }

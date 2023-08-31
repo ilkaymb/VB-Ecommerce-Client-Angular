@@ -10,6 +10,14 @@
     <h1 style="font-size: 32px">{{ "CartHeader" | translate }}</h1>
   </div>
   <div class="container">
-    <app-cart-table></app-cart-table>
+    <app-cart-table
+      [CartCheckout]="'CartCheckout' | translate"
+      [CartTotal]="'CartTotal' | translate"
+      [CartEmpty]="'CartEmpty' | translate"
+      [CartTableHeader1]="'CartTableHeader1' | translate"
+      [CartTableHeader2]="'CartTableHeader2' | translate"
+      [CartTableHeader3]="'CartTableHeader3' | translate"
+      [CartTableHeader4]="'CartTableHeader4' | translate"
+    ></app-cart-table>
   </div>
 </div>

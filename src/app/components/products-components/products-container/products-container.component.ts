@@ -21,6 +21,8 @@ export class ProductsContainerComponent  implements OnInit {
   @Input()currentCategory:string="Bilgisayar";
   @Input()options:Array<string>=[];
   @Input()searchbarPlaceholder:string="";
+  @Input()ProductsButton:string="";
+
   searchedProduct=""
 
   

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import { LocalStorageService } from 'src/services/localStorage.service';
@@ -22,6 +22,16 @@ export interface PeriodicElement {
 })
 export class CartTableComponent {
   constructor(private localStorageService: LocalStorageService,private router: Router) {}
+@Input()CartCheckout:string="";
+@Input()CartTotal:string="";
+@Input()CartEmpty:string="";
+@Input()CartTableHeader1:string="";
+@Input()CartTableHeader2:string="";
+@Input()CartTableHeader3:string="";
+@Input()CartTableHeader4:string="";
+
+
+
 
   displayedColumns: string[] = ['image', 'name', 'price','buttons'];
   cartProducts: any[] = this.localStorageService.getCartItems('cart') || [];

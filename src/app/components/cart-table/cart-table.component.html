@@ -3,26 +3,34 @@
 
   <!-- Name Column -->
   <ng-container matColumnDef="image">
-    <mat-header-cell *matHeaderCellDef> image </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>
+      {{ CartTableHeader1 }}
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <img [src]="element.image" alt="cart-image" class="cart-image" />
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>
+      {{ CartTableHeader2 }}
+    </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="price">
-    <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>
+      {{ CartTableHeader3 }}
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
       {{ element.price }}
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="buttons">
-    <mat-header-cell *matHeaderCellDef> İşlemler </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>
+      {{ CartTableHeader4 }}
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <div style="display: flex; gap: 10px">
         <button
@@ -54,11 +62,11 @@
   "
 >
   <div style="font-size: 20px">
-    Toplam Fiyat:
+    {{ CartTotal }}:
     <b>{{ totalPrice() }}</b>
   </div>
 
   <button style="padding: 25px 20px" mat-raised-button color="primary">
-    Satın Al
+    {{ CartCheckout }}
   </button>
 </div>

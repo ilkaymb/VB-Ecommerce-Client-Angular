@@ -18,77 +18,112 @@
       id="navbarsDefault"
     >
       <ul
-        class="navbar-nav me-auto mb-2 mb-lg-0"
-        style="font-size: 14px; display: flex; justify-content: center"
+        class="navbar-nav mb-2 mb-lg-0"
+        style="display: flex; justify-content: space-between; width: 100%"
       >
-        <li class="nav-item px-3">
-          <a class="nav-link active" aria-current="page" href="/">
-            <mat-icon color="white">home</mat-icon>
-            {{ "NavbarMenuItem1" | translate }}</a
-          >
-        </li>
-        <li class="nav-item px-3">
-          <a
-            class="nav-link"
-            [routerLink]="['/ürünler']"
-            [queryParams]="{ category: 'Bilgisayar' }"
-          >
-            <mat-icon color="white">laptop</mat-icon>
-            {{ "NavbarMenuItem2" | translate }}</a
-          >
-        </li>
-        <span class="form-inline">
-          <select
-            class="form-control"
-            #selectedLang
-            (change)="switchLang(selectedLang.value)"
-          >
-            <option
-              *ngFor="let language of translate.getLangs()"
-              [value]="language"
-              [selected]="language === translate.currentLang"
-            >
-              {{ language }}
-            </option>
-          </select>
-        </span>
-      </ul>
-      <div *ngIf="hasCustomerToken()" style="display: flex">
-        <a class="nav-link px-3" href="/üye-sayfasi">
-          <mat-icon color="white">person</mat-icon
-          >{{ "NavbarCustomerItem" | translate }}
-        </a>
-        <a class="nav-link px-3" href="/sepet" style="position: relative">
-          <mat-icon color="white">shopping_cart</mat-icon>
-          {{ "NavbarCartItem" | translate }}
-          <span class="cart-number" color="primary">{{
-            totalCartProduct
-          }}</span>
-        </a>
-        <button class="nav-link px-3" (click)="deleteToken()">
-          <mat-icon color="white">exit_to_app</mat-icon>
-          {{ "ExitNavbar" | translate }}
-        </button>
-      </div>
-      <div *ngIf="hasAdminToken()" style="display: flex">
-        <a class="nav-link px-3" href="/admin">
-          <mat-icon color="white">person</mat-icon>
-          {{ "NavbarAdminItem" | translate }}
-        </a>
-        <button class="nav-link px-3" (click)="deleteToken()">
-          <mat-icon color="white">exit_to_app</mat-icon>
-          {{ "ExitNavbar" | translate }}
-        </button>
-      </div>
-      <div
-        *ngIf="!hasCustomerToken() && !hasAdminToken()"
-        style="display: flex"
-      >
-        <a class="nav-link px-3" href="/giris">
-          <mat-icon color="white">vpn_key</mat-icon>
-          {{ "LoginNavbar" | translate }}</a
+        <div
+          class="navbar-nav mb-2 mb-lg-0"
+          style="
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
         >
-      </div>
+          <li class="nav-item px-3">
+            <a class="nav-link active" aria-current="page" href="/">
+              <mat-icon color="white">home</mat-icon>
+              {{ "NavbarMenuItem1" | translate }}</a
+            >
+          </li>
+          <li class="nav-item px-3">
+            <a
+              class="nav-link"
+              [routerLink]="['/ürünler']"
+              [queryParams]="{ category: 'Bilgisayar' }"
+            >
+              <mat-icon color="white">laptop</mat-icon>
+              {{ "NavbarMenuItem2" | translate }}</a
+            >
+          </li>
+          <li class="nav-item px-3">
+            <span class="form-inline">
+              <select
+                style="
+                  text-transform: uppercase;
+                  font-size: 14px;
+                  margin-right: 10px;
+                  text-align-last: center;
+                  font-weight: 500;
+                "
+                class="form-control"
+                #selectedLang
+                (change)="switchLang(selectedLang.value)"
+              >
+                <option
+                  *ngFor="let language of translate.getLangs()"
+                  [value]="language"
+                  [selected]="language === translate.currentLang"
+                >
+                  {{ language }}
+                </option>
+              </select>
+            </span>
+          </li>
+        </div>
+        <div
+          class="navbar-nav mb-2 mb-lg-0"
+          style="
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <li class="nav-item px-3">
+            <div *ngIf="hasCustomerToken()" style="display: flex">
+              <a class="nav-link px-3" href="/üye-sayfasi">
+                <mat-icon color="white">person</mat-icon
+                >{{ "NavbarCustomerItem" | translate }}
+              </a>
+              <a class="nav-link px-3" href="/sepet" style="position: relative">
+                <mat-icon color="white">shopping_cart</mat-icon>
+                {{ "NavbarCartItem" | translate }}
+                <span class="cart-number" color="primary">{{
+                  totalCartProduct
+                }}</span>
+              </a>
+              <button class="nav-link px-3" (click)="deleteToken()">
+                <mat-icon color="white">exit_to_app</mat-icon>
+                {{ "ExitNavbar" | translate }}
+              </button>
+            </div>
+          </li>
+          <li class="nav-item px-3">
+            <div *ngIf="hasAdminToken()" style="display: flex">
+              <a class="nav-link px-3" href="/admin">
+                <mat-icon color="white">person</mat-icon>
+                {{ "NavbarAdminItem" | translate }}
+              </a>
+              <button class="nav-link px-3" (click)="deleteToken()">
+                <mat-icon color="white">exit_to_app</mat-icon>
+                {{ "ExitNavbar" | translate }}
+              </button>
+            </div>
+          </li>
+          <li class="nav-item px-3">
+            <div
+              *ngIf="!hasCustomerToken() && !hasAdminToken()"
+              style="display: flex"
+            >
+              <a class="nav-link px-3" href="/giris">
+                <mat-icon color="white">vpn_key</mat-icon>
+                {{ "LoginNavbar" | translate }}</a
+              >
+            </div>
+          </li>
+        </div>
+      </ul>
     </div>
   </div>
 </nav>
