@@ -20,6 +20,7 @@ export class ProductsContainerComponent  implements OnInit {
   @Input() userLikes: any[] = []; 
   @Input()currentCategory:string="Bilgisayar";
   @Input()options:Array<string>=[];
+  @Input()searchbarPlaceholder:string="";
   searchedProduct=""
 
   

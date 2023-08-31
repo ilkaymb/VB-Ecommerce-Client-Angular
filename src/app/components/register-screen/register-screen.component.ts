@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/data.services';
 
@@ -16,7 +16,15 @@ export class RegisterScreenComponent {
   name: string = '';
   password: number | undefined;
   passwordRepeat: number | undefined;
-  
+  @Input()  namePlacecholder: string = '';
+@Input()  passwordPlaceholder: string = '';
+@Input()  LoginButton: string = '';
+@Input()  RegisterButton: string = '';
+@Input()  RegisterPasswordAgainPlaceholder: string = '';
+@Input()  ShowPassword: string = '';
+@Input()  RegisterToLogin: string = '';
+
+
   registerFunction() {
     if (this.password !== this.passwordRepeat) {
       alert("Şifreler Uyuşmuyor. Lütfen Tekrar Deneyiniz.");

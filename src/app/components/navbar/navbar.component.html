@@ -37,15 +37,30 @@
             {{ "NavbarMenuItem2" | translate }}</a
           >
         </li>
+        <span class="form-inline">
+          <select
+            class="form-control"
+            #selectedLang
+            (change)="switchLang(selectedLang.value)"
+          >
+            <option
+              *ngFor="let language of translate.getLangs()"
+              [value]="language"
+              [selected]="language === translate.currentLang"
+            >
+              {{ language }}
+            </option>
+          </select>
+        </span>
       </ul>
       <div *ngIf="hasCustomerToken()" style="display: flex">
         <a class="nav-link px-3" href="/üye-sayfasi">
           <mat-icon color="white">person</mat-icon
           >{{ "NavbarCustomerItem" | translate }}
         </a>
-        <a class="nav-link px-3" href="/üye-sayfasi" style="position: relative">
+        <a class="nav-link px-3" href="/sepet" style="position: relative">
           <mat-icon color="white">shopping_cart</mat-icon>
-          Sepet
+          {{ "NavbarCartItem" | translate }}
           <span class="cart-number" color="primary">{{
             totalCartProduct
           }}</span>

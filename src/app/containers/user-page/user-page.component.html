@@ -7,7 +7,7 @@
       text-transform: uppercase;
     "
   >
-    <h1 style="font-size: 32px">Favoriler</h1>
+    <h1 style="font-size: 32px">{{ "MemberPanelHeader" | translate }}</h1>
   </div>
   <app-products-container
     [currentProducts]="userLikes"
@@ -15,5 +15,6 @@
     [userLikes]="userLikes"
     [options]="options"
     [length]="userLikes.length"
+    [searchbarPlaceholder]="'SearchbarPlaceholder' | translate"
   ></app-products-container>
 </div>

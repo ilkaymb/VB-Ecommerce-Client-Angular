@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { LocalStorageService } from 'src/services/localStorage.service';
 
@@ -9,7 +10,9 @@ import { LocalStorageService } from 'src/services/localStorage.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private cookieService: CookieService,private router: Router,private localStorageService: LocalStorageService) {}
+  constructor(private cookieService: CookieService,private router: Router,private localStorageService: LocalStorageService,    public translate: TranslateService
+    ) {translate.addLangs(['tr','en' ]);
+  translate.setDefaultLang('tr');}
 
   isNavbarCollapsed=true;
   totalCartProduct:number=this.localStorageService.getCartItems('cart').length;
@@ -21,7 +24,9 @@ export class NavbarComponent {
   hasAdminToken(): boolean {
     return this.cookieService.check('adminToken'); // 'adminToken' isimli çerezin varlığını kontrol ediyoruz
   }
-
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
    deleteToken() {
     if(this.cookieService.check('customerToken')) {
       this.cookieService.delete('customerToken'); // 'authToken' adındaki çerezi siliyoruz

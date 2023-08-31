@@ -12,8 +12,8 @@ export class AppComponent {
   constructor(
     public translate: TranslateService
   ) {
-    translate.addLangs(['en', 'tr']);
-    translate.setDefaultLang('en');
+    translate.addLangs(['tr','en' ]);
+    translate.setDefaultLang('tr');
   }
 model = new Model();
 getName(){

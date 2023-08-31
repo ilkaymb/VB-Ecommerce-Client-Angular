@@ -1,6 +1,6 @@
 <div class="login-container">
   <mat-form-field appearance="fill" style="width: 100%">
-    <mat-label>Kullanıcı Adı</mat-label>
+    <mat-label>{{ this.namePlacecholder }}</mat-label>
     <input
       #nameID
       matInput
@@ -14,7 +14,7 @@
     <mat-icon matSuffix>person</mat-icon>
   </mat-form-field>
   <mat-form-field appearance="fill" style="width: 100%">
-    <mat-label>Şifre</mat-label>
+    <mat-label>{{ this.passwordPlaceholder }}</mat-label>
     <input
       #passwordID
       matInput
@@ -30,7 +30,9 @@
 
   <div class="bottom-button-area">
     <div class="bottom-button">
-      <p style="margin: 0; color: white">Sanal Klavye</p>
+      <p style="margin: 0; color: white">
+        {{ VirtualKeyboard }}
+      </p>
       <button
         mat-icon-button
         matSuffix
@@ -41,7 +43,7 @@
       </button>
     </div>
     <div class="bottom-button">
-      <p style="margin: 0; color: white">Şifremi Göster</p>
+      <p style="margin: 0; color: white">{{ ShowPassword }}</p>
       <button
         mat-icon-button
         matSuffix
@@ -61,7 +63,7 @@
       mat-raised-button
       style="background: #ffa800; width: 180px; padding: 25px 0; color: white"
     >
-      Kayıt Ol
+      {{ RegisterButton }}
     </a>
 
     <button
@@ -70,8 +72,8 @@
       color="primary"
       (click)="loginFunction()"
     >
-      Giriş Yap
+      {{ LoginButton }}
     </button>
   </div>
-  <p style="color: white; margin-top: 15px">Şifremi Unuttum</p>
+  <p style="color: white; margin-top: 15px">{{ ForgetPassword }}</p>
 </div>

@@ -1,9 +1,16 @@
 <div class="login-screen">
-  <h1 style="color: white">Giriş Ekranı</h1>
+  <h1 style="color: white; font-size: 28px">{{ "LoginHeader" | translate }}</h1>
   <app-login-screen
     (showVirtualKeyboard)="toggleVirtualKeyboard($event)"
     [alinanVeri]="alinanVeri"
     (getElementInput)="getElement($event)"
+    [namePlacecholder]="'LoginNamePlaceholder' | translate"
+    [passwordPlaceholder]="'LoginPasswordPlaceholder' | translate"
+    [LoginButton]="'LoginButton' | translate"
+    [RegisterButton]="'RegisterButton' | translate"
+    [VirtualKeyboard]="'VirtualKeyboard' | translate"
+    [ForgetPassword]="'ForgetPassword' | translate"
+    [ShowPassword]="'ShowPassword' | translate"
   ></app-login-screen>
   <app-virtual-keyboard
     *ngIf="showVirtualKeyboard"

@@ -1,4 +1,16 @@
 <div class="login-screen">
-  <h1 style="color: white">Kayıt Ekranı</h1>
-  <app-register-screen></app-register-screen>
+  <h1 style="color: white; font-size: 28px">
+    {{ "RegisterHeader" | translate }}
+  </h1>
+  <app-register-screen
+    [namePlacecholder]="'LoginNamePlaceholder' | translate"
+    [passwordPlaceholder]="'LoginPasswordPlaceholder' | translate"
+    [LoginButton]="'LoginButton' | translate"
+    [RegisterButton]="'RegisterButton' | translate"
+    [RegisterPasswordAgainPlaceholder]="
+      'RegisterPasswordAgainPlaceholder' | translate
+    "
+    [ShowPassword]="'ShowPassword' | translate"
+    [RegisterToLogin]="'RegisterToLogin' | translate"
+  ></app-register-screen>
 </div>

@@ -98,6 +98,9 @@ export class AdminScreenComponent {
   @Input() currentProducts: any[] = []; // @Input dekoratörü ile gelen veriyi saklamak için dizi
   @Input()currentCategory:string="Bilgisayar";
   @Input()options:Array<string>=[];
+  @Input()searchbarPlaceholder:string="";  
+  @Input()AdminPanelHeader:string="";
+
   searchedProduct=""
 
   searchProductFun(newSearch:string){

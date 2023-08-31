@@ -22,7 +22,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="search">
-    <mat-label>Aradığınız Ürün</mat-label>
+    <mat-label>{{ this.searchbarPlaceholder }}</mat-label>
     <input
       matInput
       [(ngModel)]="searchString"

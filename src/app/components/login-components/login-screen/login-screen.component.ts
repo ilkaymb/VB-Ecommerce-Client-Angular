@@ -16,10 +16,17 @@ export class LoginScreenComponent {
   @Input()  password: string ='';
   @Input() alinanVeri: string = '';
   @Output() showVirtualKeyboard: EventEmitter<boolean> = new EventEmitter<boolean>();
+@Input()  namePlacecholder: string = '';
+@Input()  passwordPlaceholder: string = '';
+@Input()  LoginButton: string = '';
+@Input()  RegisterButton: string = '';
+@Input()  VirtualKeyboard: string = '';
+@Input()  ForgetPassword: string = '';
+@Input()  ShowPassword: string = '';
 
   @Output() getElementInput: EventEmitter<HTMLInputElement> = new EventEmitter<HTMLInputElement>();
 
-
+  
 searchedProduct="";
 
 @ViewChild('nameID') nameID!: ElementRef;
