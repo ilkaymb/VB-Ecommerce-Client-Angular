@@ -45,32 +45,44 @@ export class ProductsComponent {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const category = params['category'];
+      this.currentCategory=category;
 
       if (category === 'Bilgisayar') {
         this.dataService.getData().subscribe((result) => {
           this.currentProducts = result;
           this.productCount = this.currentProducts.length;
+          if (this.cookieService.check('customerToken')) {
+            this.userId = parseInt(this.cookieService.get('userId'));
+            this.productCategoryId = this.productIdFunction();
+            this.likeService.getUserLikes(this.userId, this.productCategoryId).subscribe((result) => {
+              this.userLikes = result;
+              console.log(this.userLikes)
+
+            });
+          }
         });
       } else if (category === 'Kulaklık') {
         this.ear.getData().subscribe((result) => {
           this.currentProducts = result;
           this.productCount = this.currentProducts.length;
+          if (this.cookieService.check('customerToken')) {
+            this.userId = parseInt(this.cookieService.get('userId'));
+            this.productCategoryId = this.productIdFunction();
+            this.likeService.getUserLikes(this.userId, this.productCategoryId).subscribe((result) => {
+              this.userLikes = result;
+              console.log(this.userLikes)
+            });
+          }
         });
       } else {
         this.currentProducts = [];
         this.productCount = 0;
+        this.userLikes = [];
       }
 
-      if (this.cookieService.check('customerToken')) {
-        this.userId = parseInt(this.cookieService.get('userId'));
-        this.productCategoryId = this.productIdFunction();
-        this.likeService.getUserLikes(this.userId, this.productCategoryId).subscribe((result) => {
-          this.userLikes = result;
-        });
-      }
+
 
     });
-    
 
   }
 

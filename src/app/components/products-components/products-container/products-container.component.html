@@ -22,9 +22,18 @@
             padding: 10px;
           "
         >
-          <div class="stock">
-            Stok: &nbsp;<b>{{ product.stock }}</b>
+          <div *ngIf="product.stock <= 100">
+            <div class="stock low-stock">
+              Son&nbsp;<b>{{ product.stock }}</b
+              >&nbsp;Adet
+            </div>
           </div>
+          <div *ngIf="product.stock > 100">
+            <div class="stock">
+              <b>{{ product.stock }} </b>&nbsp;Adet
+            </div>
+          </div>
+
           <div
             style="
               display: flex;

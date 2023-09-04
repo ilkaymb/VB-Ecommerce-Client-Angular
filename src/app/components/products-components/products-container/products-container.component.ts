@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {NgFor, AsyncPipe} from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,7 +14,6 @@ import { LocalStorageService } from 'src/services/localStorage.service';
   styleUrls: ['./products-container.component.css']
 })
 export class ProductsContainerComponent  implements OnInit {
-  searchedProducts:string="";
   @Input() currentProducts: any[] = []; // @Input dekoratörü ile gelen veriyi saklamak için dizi
   @Input() userLikes: any[] = []; 
   @Input()currentCategory:string="Bilgisayar";
@@ -23,9 +21,23 @@ export class ProductsContainerComponent  implements OnInit {
   @Input()searchbarPlaceholder:string="";
   @Input()ProductsButton:string="";
 
+  searchedProducts:string="";
   searchedProduct=""
   cartProducts: any[] = this.localStorageService.getCartItems('cart') || [];
-  
+  value=""
+  myControl = new FormControl('');
+  filteredOptions!: Observable<string[]>;
+
+  @Input() length:any ;
+  pageSize = 16;
+  pageIndex = 0;
+  pageSizeOptions = [16, 24, 32];
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
+  pageEvent: PageEvent | undefined;
+
   searchProductFun(newSearch:string){
       this.searchedProduct=newSearch;
     
@@ -35,9 +47,7 @@ export class ProductsContainerComponent  implements OnInit {
     this.currentCategory=newCurrentCategory;
   }
 
-  value=""
-  myControl = new FormControl('');
-  filteredOptions!: Observable<string[]>;
+
 
   //
 
@@ -59,23 +69,19 @@ export class ProductsContainerComponent  implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  @Input() length:any ;
-  pageSize = 16;
-  pageIndex = 0;
-  pageSizeOptions = [16, 24, 32];
-  hidePageSize = false;
-  showPageSizeOptions = true;
-  showFirstLastButtons = true;
-  disabled = false;
-  pageEvent: PageEvent | undefined;
-
-  getProduction(){
-    const searchTextRegex = new RegExp(this.searchedProduct, 'i'); 
-      return this.currentProducts.slice(this.pageIndex*this.pageSize, (this.pageIndex+1)*this.pageSize).filter(product => {
-        return searchTextRegex.test(product.model) || searchTextRegex.test(product.brand);
-      });
-    
   
+
+  getProduction() {
+    const searchTextRegex = new RegExp(this.searchedProduct, 'i');
+    return this.currentProducts
+      .filter(product => {
+        return (
+          (searchTextRegex.test(product.model) ||
+          searchTextRegex.test(product.brand)) &&
+          product.stock !== 0
+        );
+      })
+      .slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
   }
 
   handlePageEvent(e: PageEvent) {
@@ -118,25 +124,19 @@ export class ProductsContainerComponent  implements OnInit {
       const productCategoryId=this.productIdFunction()
 
 this.likeService.checkLike({product_id:productId,customer_id:userId,category_id:productCategoryId}).subscribe((data:any)=>{
-  console.log(data)
   if(!data){
 
 
 this.likeService.addLike({product_id:productId,customer_id:userId,category_id:productCategoryId}).subscribe((data:any)=>{
   this.userLikes.push({id:productId})
-  console.log(this.userLikes)
-      console.log(data)
     } 
     )
   }
   else{
     this.likeService.removeLike({product_id:productId,customer_id:userId,category_id:productCategoryId}).subscribe((data:any)=>{
       this.userLikes=this.userLikes.filter((element: any) => {
-        console.log(element.id+" "  +productId)
         return element.id !== productId;
       });
-      console.log(data)
-
     }
     )
   }
@@ -154,16 +154,20 @@ this.likeService.addLike({product_id:productId,customer_id:userId,category_id:pr
 
   isSelected(productId: any): boolean {
     if (this.cookieService.check('customerToken')) {
-      if (this.userLikes.length === 0 && this.userLikes === undefined) {
-        return false;
-      } else {
-        const filteredLikes = this.userLikes.filter((element: any) => {
-          return element.id === productId;
-        });
-        return filteredLikes.length > 0;
-      }
+    
+    
+    let categoryId=this.productIdFunction()
+      // Ürünleri filtrele
+      const filteredCartElements = this.userLikes.filter((element) => {
+        return element.id === productId ;
+      });
+    
+      // Filtre sonucunu kontrol et ve sonucu döndür
+      return filteredCartElements.length > 0;
     }
-    return false;
+    else{
+     return false;
+    }
   }
  // Ürünü sepete eklemek için kullanılan metod
  addToCart(product: any): void {
@@ -171,9 +175,9 @@ this.likeService.addLike({product_id:productId,customer_id:userId,category_id:pr
    // Örnek bir ürün nesnesi
    const selectedProduct = {
     id: product.id,
-    name: product.name,
+    model: product.name,
     price: product.price,
-    image: product.image,
+    image_path: product.image,
     category:this.currentCategory,
   };
 
@@ -199,7 +203,6 @@ removeFromCart(product: any): void {
 toggleProductInCart(product: any): void {
   if( this.cookieService.check('customerToken')){
     const isProductInCart = this.cartProducts.some((item) => item.id === product.id && item.category === this.currentCategory);
-    console.log(isProductInCart)
 
     if (isProductInCart) {
       // Ürün sepette zaten var, bu nedenle kaldırın
@@ -238,4 +241,6 @@ isCartSelected(productId: any, category: any): boolean {
   // Filtre sonucunu kontrol et ve sonucu döndür
   return filteredCartElements.length > 0;
 }
+
 }
+

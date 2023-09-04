@@ -1,0 +1,69 @@
+<div style="background: #393e46; padding-top: 120px; min-height: 100vh">
+  <div
+    style="
+      margin: auto;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
+    "
+  >
+    <h1 style="font-size: 32px">Satın alınanlar</h1>
+  </div>
+  <div class="container">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="adet">
+        <mat-header-cell *matHeaderCellDef> Adet </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 1 </mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef>
+          {{ "CartTableHeader1" | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <img [src]="element.image_path" alt="cart-image" class="cart-image" />
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>
+          {{ "CartTableHeader2" | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.model }} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>
+          {{ "CartTableHeader3" | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.price }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Tarih </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 11.11.11 </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef>
+          {{ "CartTableHeader4" | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div style="display: flex; gap: 10px">
+            <button
+              class="table-button go-product"
+              (click)="productNavigate(element.category, element.id)"
+            >
+              <mat-icon color="white">arrow_forward</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { ProductPageComponent } from './containers/product-page/product-page.com
 import { UserPageComponent } from './containers/user-page/user-page.component';
 import { ProductUpdatePageComponent } from './containers/product-update-page/product-update-page.component';
 import { CartPageComponent } from './containers/cart-page/cart-page.component';
+import { PurchasedScreenComponent } from './containers/purchased-screen/purchased-screen.component';
 const routes: Routes = [ { path: '', component: MainPageComponent },
 { path: 'giris', component: LogInPageComponent },
 { path: 'kayit', component: RegisterPageComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [ { path: '', component: MainPageComponent },
 { path: 'ürün-sayfasi', component: ProductPageComponent},
 {path: 'üye-sayfasi', component: UserPageComponent  },
 {path: 'ürün-güncelle', component: ProductUpdatePageComponent  },
-{path: 'sepet', component: CartPageComponent  }];
+{path: 'sepet', component: CartPageComponent  },
+{path: 'satin-alim', component: PurchasedScreenComponent  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,39 @@
+.mat-mdc-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-column-name {
+  max-height: 125px;
+}
+
+.table-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  padding: 10px 10px;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.delete {
+  background-color: rgb(249, 63, 63);
+}
+.go-product {
+  background-color: rgb(255, 196, 0);
+}
+mat-header-cell,
+mat-cell {
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-image {
+  width: 125px;
+  height: 125px;
+}

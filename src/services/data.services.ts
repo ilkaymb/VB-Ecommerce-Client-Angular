@@ -191,4 +191,11 @@ export class SalesService {
   addSales(products: any[]): Observable<any> {
     return this.http.post(this.apiUrl, products, { responseType: 'json' });
   }
+  getSalesByCustomerAndProduct(customer_id: number,category_id:number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user-purchased/${customer_id}/${category_id}`, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+  }
 }

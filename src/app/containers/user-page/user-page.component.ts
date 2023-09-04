@@ -33,6 +33,7 @@ export class UserPageComponent {
     }  
 
   ngOnInit(): void {
+    
     this.route.queryParams.subscribe(params => {
       const category = params['category'];
       this.productCategoryId=this.productIdFunction(category);

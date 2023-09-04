@@ -45,6 +45,8 @@ import { CartTableComponent } from './components/cart-table/cart-table.component
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
+import { PurchasedScreenComponent } from './containers/purchased-screen/purchased-screen.component';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,7 @@ import {HttpClient} from '@angular/common/http';
      UserPageComponent,
      ProductUpdatePageComponent,
      CartPageComponent,
+     PurchasedScreenComponent,
      
 
   ],
@@ -77,7 +80,7 @@ import {HttpClient} from '@angular/common/http';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,SearchBarComponent, NgbModule,
-    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent,
+    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent,MatTableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
