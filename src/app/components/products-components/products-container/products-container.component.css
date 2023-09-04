@@ -68,16 +68,13 @@
 
 .product-card-button {
   padding: 20px 15px;
-  background: #ffa800;
-  border: 0;
   border-radius: 8px;
-  color: white;
   font-size: 12px;
   text-decoration: none;
   text-align: center;
 }
 .product-card-button:hover {
-  background: rgb(0, 110, 255) !important;
+  background: #ffa800 !important;
   transition: 0.5s ease;
   color: white;
 }
@@ -154,4 +151,16 @@
 .selected-icon {
   color: #ffffffe5 !important; /* Seçili ürünün rengini özelleştirin */
   /* Diğer özelleştirmeleri burada yapabilirsiniz */
+}
+.stock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: #393e46;
+  height: 40px;
+  padding: 0px 15px;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: white;
 }

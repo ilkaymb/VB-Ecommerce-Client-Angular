@@ -5,6 +5,8 @@ import { LocalStorageService } from 'src/services/localStorage.service';
 import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { SalesService } from 'src/services/data.services';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface PeriodicElement {
   id: number;
@@ -21,7 +23,7 @@ export interface PeriodicElement {
   imports: [MatTableModule,MatIconModule,MatButtonModule],
 })
 export class CartTableComponent {
-  constructor(private localStorageService: LocalStorageService,private router: Router) {}
+  constructor(private localStorageService: LocalStorageService,private router: Router,private salesService:SalesService,private cookieService:CookieService) {}
 @Input()CartCheckout:string="";
 @Input()CartTotal:string="";
 @Input()CartEmpty:string="";
@@ -30,6 +32,7 @@ export class CartTableComponent {
 @Input()CartTableHeader3:string="";
 @Input()CartTableHeader4:string="";
 
+userId:number=parseInt(this.cookieService.get('userId'));
 
 
 
@@ -37,7 +40,11 @@ export class CartTableComponent {
   cartProducts: any[] = this.localStorageService.getCartItems('cart') || [];
 
   dataSource = this.cartProducts;
-
+  ngOnInit(): void {
+    this.localStorageService.getCartItemsObservable().subscribe((items) => {
+      this.cartProducts=items;
+    });
+  }
   totalPrice(){
     let total=0
     this.dataSource.map((element)=>{
@@ -59,5 +66,42 @@ export class CartTableComponent {
       return element.id !== product.id;
     });
   }
+
+  buyProducts(): void {
+
+    
+    const transformedData = this.cartProducts.map(item => {
+      let customerId = 0;
+    let categoryId = 0;
+      if (item.category === "Bilgisayar") {
+        categoryId = 1;
+      } else if (item.category === "Kulaklık") {
+        categoryId = 2;
+      }
+      return {
+        product_category:categoryId ,
+        product_id: item.id,
+        customer_id:this.userId
+      };
+    });
+    
+  
+    this.salesService.addSales(transformedData).subscribe((response:any) => {
+
+      console.log('Başarılı yanıt:', response);
+    },
+    error => {
+      console.error('Hata:', error);
+    });
+  
+    this.localStorageService.clearCart('cart');  
+
+    this.dataSource = [];
+    this.cartProducts=[]
+    alert("Satın alma işlemi başarılı")
+
+    
+  }
+
   
 }

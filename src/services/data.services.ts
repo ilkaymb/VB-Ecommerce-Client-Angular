@@ -178,4 +178,17 @@ export class LikeService {
     });
     
   }
+
+}  
+@Injectable({
+  providedIn: 'root'
+})
+export class SalesService {
+  private apiUrl = 'https://localhost:7037/Sales'; // Web API endpoint URL'si
+
+  constructor(private http: HttpClient) { }
+
+  addSales(products: any[]): Observable<any> {
+    return this.http.post(this.apiUrl, products, { responseType: 'json' });
+  }
 }

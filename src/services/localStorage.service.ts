@@ -32,6 +32,10 @@ export class LocalStorageService {
   }
   clearCart(key: string): void {
     localStorage.removeItem(key);
+    let cartItems = this.getCartItems(key) || [];
+
+    this.cartItemsSubject.next(cartItems);
+
   }
   getCount(key: string): number {
     let cartItems = this.getCartItems(key) || [];

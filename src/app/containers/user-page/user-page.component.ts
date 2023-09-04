@@ -38,6 +38,7 @@ export class UserPageComponent {
       this.productCategoryId=this.productIdFunction(category);
 
         this.likeService.getUserLikes(this.userId,this.productCategoryId).subscribe((result) => {
+          console.log(result)
          this.userLikes=result;
         });
     });

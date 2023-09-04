@@ -24,7 +24,7 @@ export class ProductsContainerComponent  implements OnInit {
   @Input()ProductsButton:string="";
 
   searchedProduct=""
-
+  cartProducts: any[] = this.localStorageService.getCartItems('cart') || [];
   
   searchProductFun(newSearch:string){
       this.searchedProduct=newSearch;
@@ -39,12 +39,19 @@ export class ProductsContainerComponent  implements OnInit {
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
 
+  //
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
+
+
+
+    this.localStorageService.getCartItemsObservable().subscribe((items) => {
+      this.cartProducts=items;
+    });
   }
 
   private _filter(value: string): string[] {
@@ -146,13 +153,18 @@ this.likeService.addLike({product_id:productId,customer_id:userId,category_id:pr
   }
 
   isSelected(productId: any): boolean {
-    const filteredLikes = this.userLikes.filter((element: any) => {
-      return element.id === productId;
-    });
-  
-    return filteredLikes.length > 0;
+    if (this.cookieService.check('customerToken')) {
+      if (this.userLikes.length === 0 && this.userLikes === undefined) {
+        return false;
+      } else {
+        const filteredLikes = this.userLikes.filter((element: any) => {
+          return element.id === productId;
+        });
+        return filteredLikes.length > 0;
+      }
+    }
+    return false;
   }
-
  // Ürünü sepete eklemek için kullanılan metod
  addToCart(product: any): void {
   if( this.cookieService.check('customerToken')){
@@ -184,12 +196,10 @@ removeFromCart(product: any): void {
   this.localStorageService.removeItemFromCart('cart', product);
 }
 
-cartProducts: any[] = this.localStorageService.getCartItems('cart') || [];
 toggleProductInCart(product: any): void {
-  console.log(product)
   if( this.cookieService.check('customerToken')){
-    const cartItems = this.localStorageService.getCartItems('cart');
-    const isProductInCart = cartItems.some((item) => item.id === product.id);
+    const isProductInCart = this.cartProducts.some((item) => item.id === product.id && item.category === this.currentCategory);
+    console.log(isProductInCart)
 
     if (isProductInCart) {
       // Ürün sepette zaten var, bu nedenle kaldırın
@@ -214,16 +224,18 @@ toggleProductInCart(product: any): void {
   // Örnek bir ürün nesnesi
 
 }
-isCartSelected(productId: any): boolean {
-  const filteredCartElements = this.cartProducts.filter((element: any) => {
-    return element.id === productId;
+isCartSelected(productId: any, category: any): boolean {
+  // Kategori kontrolü
+  if (category !== this.currentCategory) {
+    return false;
+  }
+
+  // Ürünleri filtrele
+  const filteredCartElements = this.cartProducts.filter((element) => {
+    return element.id === productId && element.category === category;
   });
 
+  // Filtre sonucunu kontrol et ve sonucu döndür
   return filteredCartElements.length > 0;
 }
-
 }
-
-
-  
-

@@ -15,51 +15,74 @@
           style="
             width: 100%;
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid rgba(111, 111, 111, 0.275);
             padding: 10px;
-            gap: 5px;
           "
         >
-          <button
-            class="card-top-corner-button"
-            (click)="productLikeButton(product.id)"
-            [ngClass]="{ 'selected-button': isSelected(product.id) }"
-          >
-            <mat-icon
-              matSuffix
-              class="card-top-corner-icon"
-              [ngClass]="{ 'selected-icon': isSelected(product.id) }"
-              >favorite_border</mat-icon
-            >
-          </button>
-          <button
-            class="card-top-corner-button"
-            (click)="
-              toggleProductInCart({
-                id: product.id,
-                name: product.model,
-                price: product.price,
-                image: product.image_Path
-              })
+          <div class="stock">
+            Stok: &nbsp;<b>{{ product.stock }}</b>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              gap: 5px;
             "
-            [ngClass]="{ 'selected-button': isCartSelected(product.id) }"
           >
-            <mat-icon
-              class="card-top-corner-icon"
-              [ngClass]="{ 'selected-icon': isCartSelected(product.id) }"
-              >add_shopping_cart</mat-icon
+            <button
+              class="card-top-corner-button"
+              (click)="productLikeButton(product.id)"
+              [ngClass]="{ 'selected-button': isSelected(product.id) }"
             >
-          </button>
+              <mat-icon
+                matSuffix
+                class="card-top-corner-icon"
+                [ngClass]="{ 'selected-icon': isSelected(product.id) }"
+                >favorite_border</mat-icon
+              >
+            </button>
+            <button
+              class="card-top-corner-button"
+              (click)="
+                toggleProductInCart({
+                  id: product.id,
+                  name: product.model,
+                  price: product.price,
+                  image: product.image_path
+                })
+              "
+              [ngClass]="{
+                'selected-button': isCartSelected(
+                  product.id,
+                  this.currentCategory
+                )
+              }"
+            >
+              <mat-icon
+                class="card-top-corner-icon"
+                [ngClass]="{
+                  'selected-icon': isCartSelected(
+                    product.id,
+                    this.currentCategory
+                  )
+                }"
+                >add_shopping_cart</mat-icon
+              >
+            </button>
+          </div>
         </div>
 
-        <img src="{{ product.image_Path }}" alt="{{ product.name }}" />
+        <img src="{{ product.image_path }}" alt="{{ product.name }}" />
         <div class="product-card-info">
           <h3 class="product-card-title">{{ product.model }}</h3>
           <p class="product-card-description">{{ product.brand }}</p>
           <div class="card-bottom">
             <button
-              style="background: #ffa800"
-              mat-flat-button
+              mat-stroked-button
               type="button"
               class="product-card-button"
               (click)="

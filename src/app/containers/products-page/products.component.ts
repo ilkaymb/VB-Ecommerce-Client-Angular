@@ -16,7 +16,11 @@ export class ProductsComponent {
     private likeService:LikeService,
     private cookieService: CookieService,
     private route: ActivatedRoute,
-    private localStorage:LocalStorageService) { }
+    private localStorage:LocalStorageService) { 
+
+
+
+    }
 
   options: string[] = ['Bilgisayar', 'Kulaklık', 'Playstation','Xbox'];
   currentCategory: string="Bilgisayar";
@@ -38,56 +42,54 @@ export class ProductsComponent {
       return 0;
     }
   }  
-
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const category = params['category'];
-  
+
       if (category === 'Bilgisayar') {
         this.dataService.getData().subscribe((result) => {
-          this.currentProducts=result;
-          this.productCount=this.currentProducts.length;
+          this.currentProducts = result;
+          this.productCount = this.currentProducts.length;
         });
-        if(this.cookieService.check('customerToken')){
-          this.userId=parseInt(this.cookieService.get('userId')); 
-        this.likeService.getUserLikes(this.userId,this.productCategoryId).subscribe((result) => {  
-            this.userLikes=result;
-        });
-      }
-      else{
-        this.userLikes=[]
-      }
       } else if (category === 'Kulaklık') {
-          this.ear.getData().subscribe((result) => {
-          this.currentProducts=result;
-          this.productCount=this.currentProducts.length;
-          if(this.cookieService.check('customerToken')){
-            this.userId=parseInt(this.cookieService.get('userId'));
-            
-          this.likeService.getUserLikes(this.userId,this.productCategoryId).subscribe((result) => {       
-              this.userLikes=result;
-          });
-        }
-        else{
-          this.userLikes=[]
-        }
+        this.ear.getData().subscribe((result) => {
+          this.currentProducts = result;
+          this.productCount = this.currentProducts.length;
+        });
+      } else {
+        this.currentProducts = [];
+        this.productCount = 0;
+      }
+
+      if (this.cookieService.check('customerToken')) {
+        this.userId = parseInt(this.cookieService.get('userId'));
+        this.productCategoryId = this.productIdFunction();
+        this.likeService.getUserLikes(this.userId, this.productCategoryId).subscribe((result) => {
+          this.userLikes = result;
         });
       }
-      else{
-        this.currentProducts=[]
-      }
-      this.productCount = this.currentProducts.length;
+
     });
+    
+
   }
 
-
-
   isSelected(productId: any): boolean {
-    const filteredLikes = this.userLikes.filter((element: any) => {
-      return element.id === productId;
-    });
+    if (this.cookieService.check('customerToken')) {
+      if (this.userLikes.length === 0) {
+        return false;
+      } else {
+        const filteredLikes = this.userLikes.filter((element: any) => {
+          return element.id === productId;
+        });
   
-    return filteredLikes.length > 0;
+        // Burada filteredLikes dizisinde filtrelenmiş öğeler bulunuyor. Eğer bu dizinin uzunluğu 0 ise, ürün seçili değil demektir.
+        return filteredLikes.length > 0;
+      }
+    }
+  
+    // Eğer kullanıcı oturumu açmamışsa veya ürün beğenileri yüklenmemişse, varsayılan olarak ürün seçili değil olarak kabul edebiliriz.
+    return false;
   }
 
   addToCart(product: any): void {
@@ -113,7 +115,6 @@ removeFromCart(product: any): void {
 }
 
   toggleProductInCart(product: any): void {
-    console.log(product)
     if( this.cookieService.check('customerToken')){
       const cartItems = this.localStorage.getCartItems('cart');
       const isProductInCart = cartItems.some((item) => item.id === product.id);
