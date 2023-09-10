@@ -1,0 +1,48 @@
+.veri-tipi-secim {
+  border: 1px solid #ccc;
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between;
+
+  gap: 5px;
+  flex-wrap: wrap;
+  background-color: white;
+  color: black;
+}
+
+.category-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.custom-container {
+  margin: auto;
+  max-width: 700px;
+}
+
+.select-row {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+}
+
+.alt-select-row {
+  display: flex;
+  align-items: center;
+}
+
+.artı-button {
+  background-color: #66bb6a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.artı-button:hover,
+.sil-button:hover {
+  opacity: 0.8;
+}

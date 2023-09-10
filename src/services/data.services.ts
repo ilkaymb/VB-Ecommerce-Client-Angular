@@ -199,3 +199,31 @@ export class SalesService {
     });
   }
 }
+@Injectable({
+  providedIn: 'root'
+})
+export class DynamicTableService {
+  private apiUrl = 'https://localhost:7037/DynamicTable'; // Web API endpoint URL'si
+
+  constructor(private http: HttpClient) { }
+
+  postData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, data);
+  }
+}
+@Injectable({
+  providedIn: 'root'
+})
+export class CategoryService {
+  private apiUrl = 'https://localhost:7037/DynamicData/categories'; // Web API endpoint URL'si
+
+  constructor(private http: HttpClient) { }
+
+  getData(): Observable<any> {
+    return this.http.get(this.apiUrl, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+  }
+}

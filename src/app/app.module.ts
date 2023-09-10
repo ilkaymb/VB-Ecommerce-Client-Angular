@@ -47,6 +47,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
 import { PurchasedScreenComponent } from './containers/purchased-screen/purchased-screen.component';
 import { MatTableModule } from '@angular/material/table';
+import { CreateCategoryComponent } from './containers/create-category/create-category.component';
+import { MatSelectModule } from '@angular/material/select';
+import { AddProductComponent } from './containers/add-product/add-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,8 +70,8 @@ import { MatTableModule } from '@angular/material/table';
      ProductUpdatePageComponent,
      CartPageComponent,
      PurchasedScreenComponent,
-     
-
+     CreateCategoryComponent,
+     AddProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,7 @@ import { MatTableModule } from '@angular/material/table';
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatInputModule,
+    MatInputModule,MatSelectModule,
     MatFormFieldModule,SearchBarComponent, NgbModule,
     ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent,MatTableModule,
     TranslateModule.forRoot({
@@ -89,7 +92,6 @@ import { MatTableModule } from '@angular/material/table';
       }
     })
 ,
-
 MatSlideToggleModule,
 MatPaginatorModule,
 JsonPipe,

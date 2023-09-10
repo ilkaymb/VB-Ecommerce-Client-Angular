@@ -1,0 +1,76 @@
+<div style="background: #393e46; padding-top: 120px; min-height: 100vh">
+  <div
+    style="
+      margin: auto;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
+    "
+  >
+    <h1 style="font-size: 32px">Creat Category</h1>
+  </div>
+  <div class="custom-container">
+    <div>
+      <mat-form-field>
+        <mat-label>Category Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="tableName"
+          (change)="onAltVeriTipiSecildi()"
+        />
+      </mat-form-field>
+    </div>
+    <div
+      class="veri-tipi-secim"
+      *ngFor="let secim of veriTipiSecimleri; let i = index"
+    >
+      <div class="alt-select-row">
+        <mat-form-field>
+          <mat-label>Özellik İsmi</mat-label>
+          <input
+            matInput
+            [(ngModel)]="secim.name"
+            (change)="onAltVeriTipiSecildi()"
+          />
+        </mat-form-field>
+      </div>
+      <div class="alt-select-row">
+        <mat-form-field>
+          <mat-label>Veri Tipi</mat-label>
+          <mat-select
+            id="altVeriTipiSelect{{ i }}"
+            name="altVeriTipiSelect{{ i }}"
+            [(ngModel)]="secim.type"
+            (change)="onAltVeriTipiSecildi()"
+          >
+            <mat-option *ngFor="let dataType of dataTypes" [value]="dataType">
+              {{ dataType }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button
+        style="
+          height: 56px;
+          width: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 0;
+          background-color: red;
+          color: white;
+        "
+        color="warn"
+        aria-label="Example icon button with a home icon"
+        (click)="silVeriTipiSecimi(i)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <button class="artı-button" (click)="ekleVeriTipiSecimi()">Ekle</button>
+    <button class="artı-button" (click)="dataControlFunction()">Kontrol</button>
+    <button class="artı-button" (click)="inputIsEmpty()">Boş Kontrol</button>
+    <button class="artı-button" (click)="gonderVeriyi()">Veriyi Gönder</button>
+  </div>
+</div>

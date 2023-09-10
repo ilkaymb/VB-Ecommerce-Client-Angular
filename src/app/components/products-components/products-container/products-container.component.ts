@@ -16,7 +16,7 @@ import { LocalStorageService } from 'src/services/localStorage.service';
 export class ProductsContainerComponent  implements OnInit {
   @Input() currentProducts: any[] = []; // @Input dekoratörü ile gelen veriyi saklamak için dizi
   @Input() userLikes: any[] = []; 
-  @Input()currentCategory:string="Bilgisayar";
+  @Input()currentCategory:string="";
   @Input()options:Array<string>=[];
   @Input()searchbarPlaceholder:string="";
   @Input()ProductsButton:string="";

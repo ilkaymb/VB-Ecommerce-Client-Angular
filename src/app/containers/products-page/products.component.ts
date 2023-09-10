@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DataService, LikeService } from 'src/services/data.services';
+import { CategoryService, DataService, LikeService } from 'src/services/data.services';
 import { EarPhoneService } from 'src/services/data.services';
 
 import { ActivatedRoute } from '@angular/router';
@@ -16,14 +16,15 @@ export class ProductsComponent {
     private likeService:LikeService,
     private cookieService: CookieService,
     private route: ActivatedRoute,
-    private localStorage:LocalStorageService) { 
+    private localStorage:LocalStorageService,
+    private categoryService:CategoryService) { 
 
 
 
     }
 
-  options: string[] = ['Bilgisayar', 'Kulaklık', 'Playstation','Xbox'];
-  currentCategory: string="Bilgisayar";
+  options: string[] = [];
+  currentCategory: string="computer";
   currentProducts:any;
   productCount:any;
   userId:number=0;
@@ -43,11 +44,17 @@ export class ProductsComponent {
     }
   }  
   ngOnInit(): void {
+
+this.categoryService.getData().subscribe((result) => {
+  this.options = result;
+  console.log(result)
+});
+
     this.route.queryParams.subscribe(params => {
       const category = params['category'];
       this.currentCategory=category;
 
-      if (category === 'Bilgisayar') {
+      if (category === 'Bilgisayar' || category === 'computer') {
         this.dataService.getData().subscribe((result) => {
           this.currentProducts = result;
           this.productCount = this.currentProducts.length;
@@ -61,7 +68,7 @@ export class ProductsComponent {
             });
           }
         });
-      } else if (category === 'Kulaklık') {
+      } else if (category === 'Kulaklık'|| category === 'earphone') {
         this.ear.getData().subscribe((result) => {
           this.currentProducts = result;
           this.productCount = this.currentProducts.length;

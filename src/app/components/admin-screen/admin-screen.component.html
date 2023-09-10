@@ -15,7 +15,24 @@
     (newCurrentCategory)="changeCurrentCategory($event)"
     [searchbarPlaceholder]="searchbarPlaceholder"
   ></app-product-search-bar>
-
+  <div class="admin-container">
+    <a
+      href="/create-category"
+      style="width: 200px; padding: 25px 0; text-align: center"
+      mat-raised-button
+      color="primary"
+    >
+      Kategori Ekle
+    </a>
+    <a
+      href="/add-product"
+      style="width: 200px; padding: 25px 0; text-align: center"
+      mat-raised-button
+      color="primary"
+    >
+      Ürün Ekle
+    </a>
+  </div>
   <div class="admin-container">
     <span [ngSwitch]="getProduction().length > 0">
       <div class="admin-container" *ngSwitchCase="true">
