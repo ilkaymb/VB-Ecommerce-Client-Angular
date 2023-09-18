@@ -10,12 +10,13 @@
     <h1 style="font-size: 32px">{{ "MemberPanelHeader" | translate }}</h1>
   </div>
   <app-products-container
-    [currentProducts]="userLikes"
+    [currentProducts]="currentProducts"
     [currentCategory]="currentCategory"
     [userLikes]="userLikes"
     [options]="options"
-    [length]="userLikes.length"
+    [length]="productCount"
     [searchbarPlaceholder]="'SearchbarPlaceholder' | translate"
     [ProductsButton]="'ProductsButton' | translate"
+    [categoryId]="categoryId"
   ></app-products-container>
 </div>

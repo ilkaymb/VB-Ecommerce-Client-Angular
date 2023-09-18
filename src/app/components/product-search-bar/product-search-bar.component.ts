@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-product-search-bar',
   templateUrl: './product-search-bar.component.html',
@@ -22,7 +23,7 @@ import { Router } from '@angular/router';
     MatAutocompleteModule,
     ReactiveFormsModule,
     NgFor,
-    AsyncPipe,MatIconModule,MatButtonModule,
+    AsyncPipe,MatIconModule,MatButtonModule,MatSelectModule
   ],
   
 })
@@ -30,12 +31,13 @@ export class ProductSearchBarComponent implements OnInit {
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
   @Input()options:Array<string>=[];
+  @Input()currentCategory:string="";
+
   @Input()searchbarPlaceholder:string="";
 @Output() newSearchEvent = new EventEmitter<string>();
 @Output() newItemEvent = new EventEmitter<string>();
 @Output() newCurrentCategory = new EventEmitter<string>();
 
-filterSelect="Bilgisayar"
 value=""
 searchString=""
 addNewItem(value: string) {
@@ -53,14 +55,7 @@ constructor(
   private route: ActivatedRoute,
   private router: Router) { }
 
-onChangeSelectProduct(value: string) { 
-  this.newCurrentCategory.emit(this.filterSelect);
- this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { category: this.filterSelect },
-      queryParamsHandling: 'merge'
-    });
-}
+
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -68,7 +63,17 @@ onChangeSelectProduct(value: string) {
       map(value => this._filter(value || '')),
     );
   }
+  onProductSelect(event: any) {
+    // Seçilen ürünü değişkene atama
+    this.newCurrentCategory.emit(event.value);
+    console.log(event.value)
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { category: event.value },
+      queryParamsHandling: 'merge'
+    });
 
+  }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 

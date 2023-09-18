@@ -10,12 +10,13 @@
     <h1 style="font-size: 32px">{{ AdminPanelHeader }}</h1>
   </div>
   <app-product-search-bar
+    [currentCategory]="this.currentCategory"
     [options]="options"
     (newSearchEvent)="searchProductFun($event)"
     (newCurrentCategory)="changeCurrentCategory($event)"
     [searchbarPlaceholder]="searchbarPlaceholder"
   ></app-product-search-bar>
-  <div class="admin-container">
+  <div class="admin-container" style="justify-content: center">
     <a
       href="/create-category"
       style="width: 200px; padding: 25px 0; text-align: center"

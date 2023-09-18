@@ -1,7 +1,7 @@
 .product-container {
   max-width: 1200px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 15px;
@@ -11,7 +11,7 @@
 }
 
 .product-card {
-  width: 258px;
+  width: 260px;
   height: 100%;
   background-color: #ffffff;
   border: 1px solid #e6e6e6;
@@ -82,7 +82,7 @@
 .product-card-price {
   font-size: 18px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   color: #e89c04;
 }

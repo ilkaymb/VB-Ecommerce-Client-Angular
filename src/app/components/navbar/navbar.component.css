@@ -8,25 +8,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 20px;
+  font-size: 16px;
 }
 .navbar-brand {
   color: white !important;
   font-size: 36px;
   font-weight: bold;
-}
-.cart-number {
-  position: relative;
-  background-color: white;
-  color: black;
-  bottom: 8px;
-  right: 5px;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
 }

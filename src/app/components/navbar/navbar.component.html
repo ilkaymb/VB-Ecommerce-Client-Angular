@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top py-3">
+<nav class="navbar navbar-expand-xl navbar-dark fixed-top py-3">
   <div class="container">
     <a class="navbar-brand px-3" href="/">VBE</a>
     <button
@@ -41,7 +41,7 @@
             <a
               class="nav-link"
               [routerLink]="['/ürünler']"
-              [queryParams]="{ category: 'Bilgisayar' }"
+              [queryParams]="{ category: 'computer' }"
             >
               <mat-icon color="white">laptop</mat-icon>
               {{ "NavbarMenuItem2" | translate }}</a
@@ -84,16 +84,22 @@
             gap: 10px;
           "
         >
-          <a class="nav-link px-3" href="/üye-sayfasi">
+          <a
+            class="nav-link px-3"
+            [routerLink]="['/üye-sayfasi']"
+            [queryParams]="{ category: 'computer' }"
+          >
             <mat-icon color="white">person</mat-icon
             >{{ "NavbarCustomerItem" | translate }}
           </a>
           <a class="nav-link px-3" href="/sepet" style="position: relative">
-            <mat-icon color="white">shopping_cart</mat-icon>
+            <mat-icon
+              color="white"
+              matBadge=" {{ totalCartProduct }}"
+              matBadgeColor="warn"
+              >shopping_cart</mat-icon
+            >
             {{ "NavbarCartItem" | translate }}
-            <span class="cart-number" color="primary">{{
-              totalCartProduct
-            }}</span>
           </a>
           <button class="nav-link px-3" (click)="deleteToken()">
             <mat-icon color="white">exit_to_app</mat-icon>
@@ -111,7 +117,11 @@
             gap: 10px;
           "
         >
-          <a class="nav-link px-3" href="/admin">
+          <a
+            class="nav-link px-3"
+            [routerLink]="['/admin']"
+            [queryParams]="{ category: 'computer' }"
+          >
             <mat-icon color="white">person</mat-icon>
             {{ "NavbarAdminItem" | translate }}
           </a>

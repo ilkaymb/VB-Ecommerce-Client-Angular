@@ -4,11 +4,15 @@
       margin: auto;
       text-align: center;
       color: white;
-      text-transform: uppercase;
+      text-transform: capitalize;
     "
   >
     <h1 style="font-size: 32px">{{ "ProductsPageHeader" | translate }}</h1>
+    <h2>
+      "{{ currentCategory }}" araması için {{ productCount }} sonuç listeleniyor
+    </h2>
   </div>
+  <h1></h1>
   <app-products-container
     [currentProducts]="currentProducts"
     [currentCategory]="currentCategory"
@@ -17,5 +21,7 @@
     [length]="productCount"
     [searchbarPlaceholder]="'SearchbarPlaceholder' | translate"
     [ProductsButton]="'ProductsButton' | translate"
+    [cartProducts]="cartProducts"
+    [categoryId]="categoryId"
   ></app-products-container>
 </div>

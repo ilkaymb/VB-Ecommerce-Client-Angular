@@ -9,4 +9,58 @@
   >
     <h1 style="font-size: 32px">Add Product</h1>
   </div>
+  <div class="product-update-screen">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-12 col-lg-12">
+          <mat-form-field>
+            <mat-label>Ürün</mat-label>
+            <mat-select
+              (selectionChange)="onProductSelect($event)"
+              [value]="options[0]"
+            >
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div *ngFor="let field of types" class="col-md-12 col-lg-6">
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>{{ field.name }}</mat-label>
+            <input
+              matInput
+              [type]="getFieldType(field.type)"
+              [(ngModel)]="field.value"
+            />
+          </mat-form-field>
+        </div>
+        <div class="button-area">
+          <a
+            routerLink="/admin"
+            mat-raised-button
+            style="
+              background: #ffa800;
+              width: 50%;
+              padding: 25px 0;
+              color: white;
+              text-align: center;
+            "
+          >
+            Admin Sayfasına Dön
+          </a>
+
+          <button
+            (click)="submitForm()"
+            style="width: 50%; padding: 25px 0; text-align: center"
+            mat-raised-button
+            color="primary"
+          >
+            Ürün Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

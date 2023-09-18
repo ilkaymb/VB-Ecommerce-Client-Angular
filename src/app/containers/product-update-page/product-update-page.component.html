@@ -1,87 +1,37 @@
 <div class="product-update-screen">
   <div class="container">
     <div class="row g-3">
-      <div class="col-md-12 col-lg-7">
-        <div class="product-update-image-frame">
+      <div class="col-md-12 col-lg-6">
+        <div class="product-image-frame">
           <img
-            [src]="productModel.image_Path"
-            alt="product-update-image"
-            class="product-update-image"
+            [src]="productModel.image_path"
+            alt="product image"
+            class="product-image"
           />
         </div>
       </div>
-      <div class="col-md-12 col-lg-5">
-        <div class="product-update-container">
-          <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Ürün Adı</mat-label>
-            <input matInput type="text" [(ngModel)]="productModel.model" />
-            <mat-icon style="" matSuffix>shopping_cart</mat-icon>
-          </mat-form-field>
-          <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Satıcı</mat-label>
-            <input matInput [(ngModel)]="productModel.brand" />
-            <mat-icon style="" matSuffix>business</mat-icon>
-          </mat-form-field>
-          <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Resim Url</mat-label>
-            <input matInput [(ngModel)]="productModel.image_Path" />
-            <mat-icon style="" matSuffix>image</mat-icon>
-          </mat-form-field>
-          <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Price</mat-label>
-            <input matInput [(ngModel)]="productModel.price" />
-            <mat-icon style="" matSuffix> attach_money</mat-icon>
-          </mat-form-field>
-          <div *ngIf="productCategory === 'Bilgisayar'">
+      <div class="col-md-12 col-lg-6">
+        <div class="row g-3">
+          <div *ngFor="let field of types" class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill" style="width: 100%">
-              <mat-label>Processor</mat-label>
-              <input matInput [(ngModel)]="productModel.processor" />
-              <mat-icon style="" matSuffix>settings</mat-icon>
+              <mat-label>{{ field.name }}</mat-label>
+              <input
+                matInput
+                [type]="getFieldType(field.type)"
+                [(ngModel)]="productModel[field.name]"
+              />
             </mat-form-field>
-            <mat-form-field appearance="fill" style="width: 100%">
-              <mat-label>Ram</mat-label>
-              <input matInput [(ngModel)]="productModel.ram_Capacity" />
-              <mat-icon style="" matSuffix>settings</mat-icon>
-            </mat-form-field>
-            <mat-form-field appearance="fill" style="width: 100%">
-              <mat-label>Storage</mat-label>
-              <input matInput [(ngModel)]="productModel.storage_Capacity" />
-              <mat-icon style="" matSuffix>settings</mat-icon>
-            </mat-form-field>
-          </div>
-          <div *ngIf="productCategory === 'Kulaklık'">
-            <mat-form-field appearance="fill" style="width: 100%">
-              <mat-label>Color</mat-label>
-              <input matInput [(ngModel)]="productModel.color" />
-              <mat-icon style="" matSuffix>settings</mat-icon>
-            </mat-form-field>
-          </div>
-
-          <div class="button-area">
-            <a
-              href="/admin"
-              mat-raised-button
-              style="
-                background: #ffa800;
-                width: 50%;
-                padding: 25px 0;
-                color: white;
-                text-align: center;
-              "
-            >
-              Admin Sayfasına Dön
-            </a>
-
-            <button
-              style="width: 50%; padding: 25px 0; text-align: center"
-              mat-raised-button
-              color="primary"
-              (click)="updateProduct()"
-            >
-              Güncelle
-            </button>
           </div>
         </div>
+        <button
+          style="width: 100%; padding: 30px 0"
+          (click)="updateProduct()"
+          mat-raised-button
+          color="primary"
+          class="update-button"
+        >
+          Güncelle
+        </button>
       </div>
     </div>
   </div>

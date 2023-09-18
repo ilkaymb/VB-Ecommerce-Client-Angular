@@ -1,5 +1,6 @@
 <app-product-search-bar
   [options]="options"
+  [currentCategory]="this.currentCategory"
   (newSearchEvent)="searchProductFun($event)"
   (newCurrentCategory)="changeCurrentCategory($event)"
   [searchbarPlaceholder]="this.searchbarPlaceholder"
@@ -65,19 +66,23 @@
                 })
               "
               [ngClass]="{
-                'selected-button': isCartSelected(
-                  product.id,
-                  this.currentCategory
-                )
+                'selected-button': isCartSelected({
+                  id: product.id,
+                  name: product.model,
+                  price: product.price,
+                  image: product.image_path
+                })
               }"
             >
               <mat-icon
                 class="card-top-corner-icon"
                 [ngClass]="{
-                  'selected-icon': isCartSelected(
-                    product.id,
-                    this.currentCategory
-                  )
+                  'selected-icon': isCartSelected({
+                    id: product.id,
+                    name: product.model,
+                    price: product.price,
+                    image: product.image_path
+                  })
                 }"
                 >add_shopping_cart</mat-icon
               >
@@ -107,7 +112,7 @@
         </div>
       </div>
       <mat-paginator
-        style="width: 100%"
+        style="min-width: 100%"
         #paginator
         class="demo-paginator"
         (page)="handlePageEvent($event)"

@@ -1,7 +1,7 @@
 <div class="product-page-screen">
   <div class="container">
     <div class="row g-3">
-      <div class="col-lg-7 col-md-12 col-sm-12">
+      <div class="col-md-12 col-lg-6">
         <div class="product-image-frame">
           <img
             [src]="productModel.image_path"
@@ -10,62 +10,63 @@
           />
         </div>
       </div>
-      <div class="col-lg-5 col-md-12 col-sm-12 product-info">
-        <div>
-          <h1 class="product-name">{{ productModel.model }}</h1>
-          <p class="product-price">{{ productModel.price | currency }}</p>
-        </div>
-        <p class="product-description">
-          Üretici: <b>{{ productModel.brand }}</b>
-        </p>
-        <div *ngIf="productCategory === 'Bilgisayar'">
-          <p class="product-description">
-            İşlemci: <b>{{ productModel.processor }}</b>
-          </p>
-
-          <p class="product-description">
-            Ram: <b>{{ productModel.ram_Capacity }}</b>
-          </p>
-
-          <p class="product-description">
-            Depolama Kapasitesi: <b>{{ productModel.storage_Capacity }}</b>
-          </p>
-        </div>
-        <div *ngIf="productCategory === 'Kulaklık'">
-          <p class="product-description">
-            Renk: <b>{{ productModel.color }}</b>
-          </p>
-        </div>
-        <div class="button-area">
-          <button
-            (click)="productLikeButton(productModel.id)"
-            style="width: 50%"
-            mat-raised-button
-            class="product-button"
-            [ngClass]="{ 'selected-button': isSelected(productModel.id) }"
-          >
-            <mat-icon
-              (click)="toggleProductInCart()"
-              matSuffix
-              [ngClass]="{ 'selected-icon': isSelected(productModel.id) }"
-              >favorite_border</mat-icon
-            >
-            Beğen
-          </button>
-          <button
-            (click)="toggleProductInCart()"
-            style="width: 50%"
-            mat-raised-button
-            class="product-button"
-            [ngClass]="{ 'selected-button': isCartSelected(productModel.id) }"
-          >
-            <mat-icon
-              matSuffix
-              [ngClass]="{ 'selected-icon': isCartSelected(productModel.id) }"
-              >add_shopping_cart</mat-icon
-            >
-            Sepete Ekle
-          </button>
+      <div class="col-md-12 col-lg-6">
+        <div class="row g-3">
+          <div *ngFor="let field of types" class="col-md-12 col-lg-6">
+            <h1 class="field-title">{{ field.name }}:</h1>
+            <h3 class="field-name">
+              {{ productModel[field.name] }}
+            </h3>
+          </div>
+          <div class="col-md-12 col-lg-12">
+            <div class="button-area">
+              <button
+                (click)="productLikeButton(productModel.id)"
+                style="width: 50%"
+                mat-raised-button
+                class="product-button"
+                [ngClass]="{ 'selected-button': isSelected(productModel.id) }"
+              >
+                <mat-icon
+                  matSuffix
+                  [ngClass]="{ 'selected-icon': isSelected(productModel.id) }"
+                  >favorite_border</mat-icon
+                >
+                Beğen
+              </button>
+              <button
+                (click)="
+                  toggleProductInCart({
+                    id: productModel.id,
+                    name: productModel.model,
+                    price: productModel.price,
+                    image: productModel.image_path
+                  })
+                "
+                style="width: 50%"
+                mat-raised-button
+                class="product-button"
+                [ngClass]="{
+                  'selected-button': isCartSelected(
+                    productModel.id,
+                    this.currentCategory
+                  )
+                }"
+              >
+                <mat-icon
+                  matSuffix
+                  [ngClass]="{
+                    'selected-icon': isCartSelected(
+                      productModel.id,
+                      this.currentCategory
+                    )
+                  }"
+                  >add_shopping_cart</mat-icon
+                >
+                Sepete Ekle
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -94,7 +94,7 @@ user:any={username:"",password:"",roleId:0};
           this.cookieService.set('userId', res.userLoginResponse.id); // userId'i çereze ekleyin
           this.cookieService.set('userName', this.name); // userName'i çereze ekleyin
 
-          this.router.navigate(['/üye-sayfasi']);
+          this.router.navigate(['/üye-sayfasi'], { queryParams: { category: 'computer' } });
 
         }
         else if(res.userLoginResponse.roleId==2){
@@ -102,7 +102,7 @@ user:any={username:"",password:"",roleId:0};
           this.cookieService.set('adminToken', res.token);
           this.cookieService.set('userId', res.userLoginResponse.id); // userId'i çereze ekleyin
           this.cookieService.set('userName', this.name); // userName'i çereze ekleyin
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin'], { queryParams: { category: 'computer' } });
         }
       },
       (err: any) => {

@@ -7,7 +7,7 @@
       {{ CartTableHeader1 }}
     </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <img [src]="element.image" alt="cart-image" class="cart-image" />
+      <img [src]="element.image_path" alt="cart-image" class="cart-image" />
     </mat-cell>
   </ng-container>
 
@@ -15,7 +15,7 @@
     <mat-header-cell *matHeaderCellDef>
       {{ CartTableHeader2 }}
     </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{ element.model }} </mat-cell>
   </ng-container>
 
   <!-- Weight Column -->

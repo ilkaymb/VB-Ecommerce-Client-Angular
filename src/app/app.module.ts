@@ -22,7 +22,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { RegisterScreenComponent } from './components/register-screen/register-screen.component';
 import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductSearchBarComponent } from './components/product-search-bar/product-search-bar.component';
 
@@ -50,6 +49,8 @@ import { MatTableModule } from '@angular/material/table';
 import { CreateCategoryComponent } from './containers/create-category/create-category.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AddProductComponent } from './containers/add-product/add-product.component';
+import {MatBadgeModule} from '@angular/material/badge';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,8 +83,8 @@ import { AddProductComponent } from './containers/add-product/add-product.compon
     BrowserAnimationsModule,
     MatIconModule,
     MatInputModule,MatSelectModule,
-    MatFormFieldModule,SearchBarComponent, NgbModule,
-    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent,MatTableModule,
+    MatFormFieldModule, NgbModule,
+    ProductSearchBarComponent,MatGridListModule,MatButtonModule,CartTableComponent,MatTableModule,MatBadgeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,24 +1,19 @@
 <div class="product-top-section">
-  <mat-form-field class="select-category">
+  <mat-form-field>
     <mat-label>Ürün</mat-label>
-    <input
-      type="text"
-      placeholder="Seçiniz"
-      aria-label="Number"
-      matInput
-      [formControl]="myControl"
-      [matAutocomplete]="auto"
-      [(ngModel)]="filterSelect"
-      (ngModelChange)="onChangeSelectProduct(filterSelect)"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-select
+      (selectionChange)="onProductSelect($event)"
+      [value]="currentCategory"
+      style="text-transform: capitalize"
+    >
       <mat-option
-        *ngFor="let option of filteredOptions | async"
+        *ngFor="let option of options"
         [value]="option"
+        style="text-transform: capitalize"
       >
         {{ option }}
       </mat-option>
-    </mat-autocomplete>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="search">

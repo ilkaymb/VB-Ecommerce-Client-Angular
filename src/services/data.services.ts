@@ -140,46 +140,42 @@ export class CustomerService {
   providedIn: 'root'
 })
 export class LikeService {
-  private baseUrl = 'https://localhost:7037/Like'; // API adresinizi ve port numaranızı buraya ekleyin
+  private baseUrl = 'https://localhost:7037'; // API'nizin temel URL'sini buraya ekleyin
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  addLike(body: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, body, {
-      headers: {
-        'accept': '*/*'
-      }
-    });
-  }
-  removeLike(body: any): Observable<any> {
+  addLike(likeModel: any, tableName: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'accept': '*/*'
+      'accept': '*/*',
+      'Content-Type': 'application/json'
     });
 
-    return this.http.delete(`${this.baseUrl}/remove`, {
-      headers,
-      body: JSON.stringify(body) // Göndermek istediğiniz JSON verisini burada gövde olarak ekliyoruz.
-    });
-  }
-  checkLike(body: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/check-like`, body, {
-      headers: {
-        'accept': '*/*'
-      }
-    });
-    
-  }
-  getUserLikes(customer_id: any, category_id: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user-likes/${customer_id}/${category_id}`, {
-      headers: {
-        'accept': '*/*'
-      }
-    });
-    
+
+   
+
+    return this.http.post(`${this.baseUrl}/Like/AddLike/${tableName}`, likeModel, { headers });
   }
 
-}  
+  removeLike(likeModel: any, tableName: string): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'accept': '*/*',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete(`${this.baseUrl}/Like/remove/${tableName}`,{ headers, body: likeModel });
+  }
+
+  checkLike(likeModel: any): Observable<boolean> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post<boolean>(`${this.baseUrl}/Like/check-like`, likeModel, { headers });
+  }
+
+  getUserLikes(customerId: number, categoryId: number, tableName: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/Like/user-likes/${customerId}/${categoryId}/${tableName}`);
+  }
+}
 @Injectable({
   providedIn: 'root'
 })
