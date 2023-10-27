@@ -1,4 +1,24 @@
-Project UI Image
+#Summary
+It was the e-commerce site I developed during my internship at Vakıfbank. Developed using Angular on the front and asp.net on the back.
+
+#Pages
+##You can see the images of the pages below.
+1. Home Page
+2. Products Page
+3. Admin Page
+4. Login Page
+5. Register Page
+6. Add Product Page
+7. Update Page
+8. Add Category Page
+9. Product Page
+
+#Side Features
+1. Virtual Keyboard
+2. English-Turkish Translation
+3. Responsive Web Design
+
+#Project UI Image
 ![translate2](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/3d57aef3-b0b3-4902-9b36-c1fd7955d750)
 
 ![ürünler sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/6aedee6c-0475-4cc0-9594-30961fdeeda0)
@@ -18,7 +38,7 @@ Project UI Image
 ![sanal klavye](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/0ef0c58a-0db3-4130-b142-11e70459e5e8)
 
 
-# AngularProject1
+# VB Ecommerce Website
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
 
