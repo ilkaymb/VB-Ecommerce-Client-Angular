@@ -1,8 +1,8 @@
-#Summary
+# Summary
 It was the e-commerce site I developed during my internship at Vakıfbank. Developed using Angular on the front and asp.net on the back.
 
-#Pages
-##You can see the images of the pages below.
+# Pages
+## You can see the images of the pages below.
 1. Home Page
 2. Products Page
 3. Admin Page
@@ -13,12 +13,12 @@ It was the e-commerce site I developed during my internship at Vakıfbank. Devel
 8. Add Category Page
 9. Product Page
 
-#Side Features
+# Side Features
 1. Virtual Keyboard
 2. English-Turkish Translation
 3. Responsive Web Design
 
-#Project UI Image
+# Project UI Image
 ![translate2](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/3d57aef3-b0b3-4902-9b36-c1fd7955d750)
 
 ![ürünler sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/6aedee6c-0475-4cc0-9594-30961fdeeda0)
