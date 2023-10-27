@@ -22,27 +22,37 @@ You can see the images of the pages below.
 
 # Project UI Image
 ## Home Page
-![translate2](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/3d57aef3-b0b3-4902-9b36-c1fd7955d750)
+![giriş sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/92a559e8-fde0-4a01-b3d0-b9799b153190)
+
 ## Products Page
-![ürünler sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/6aedee6c-0475-4cc0-9594-30961fdeeda0)
+![ürünler sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/2cecfed8-16fd-4b18-bbb8-9e5624c98166)
+
 ## Customer Page
-![üye sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/0499f81e-9529-4bf5-8ce2-3cf3d9c862ee)
+![üye sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/4f49ce55-5c32-4c0c-81b9-10052c3e8487)
+
 ## Product Page
-![VB-E-Commerce (1)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/184757c9-25d1-4f89-8752-c3e9c7bfab23)
+![VB-E-Commerce (1)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/83b94339-b3c0-4e2c-8013-25163cba8ada)
+
 ## Update Page
-![VB-E-Commerce (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/591a46d9-be80-4a83-8e6f-271c2966e6b1)
+![vbBackendImage](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/52c6adb4-c17a-4e5b-ae23-6261db126cf3)
+
 ## Add Product Page
-![ürün ekleme](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/2c4a5295-d775-4b5b-9ddc-b0acab1ce3a9)
+![ürün ekleme](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/d084f015-8dec-4f33-8120-45ad1c1bca0d)
+
 ## Cart Page
-![sepet (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/a5539f07-7882-4b0d-928f-44e87ec63f29)
+![sepet (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/60147484-e9eb-45fb-b57b-d3b4a5f3a0aa)
+
 ## Admin Page
-![admin](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/8adc1af5-5770-454f-8b5b-4f349ce6a5d5)
+![admin](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/bf8eaa43-bff1-4da4-ba26-a2b7862971cf)
+
 ## Add Category
-![kategori](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/c06cdfe0-8c87-4e1c-93d6-d4b556481cd3)
+![kategori](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/10472fb5-f775-46ed-9f61-f969104e8081)
+
 ## Login Page
-![giriş sayfası (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/42f1f03e-57e0-4278-9f3d-744f3e0a6761)
+![giriş sayfası (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/f00c9e4f-4bd1-4ed6-994b-4dd0a2b40587)
+
 ## Virtual Keyboard
-![sanal klavye](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/0ef0c58a-0db3-4130-b142-11e70459e5e8)
+![sanal klavye](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/f0d735d2-b756-4889-9d5e-687d95d2c1c6)
 
 # VB Ecommerce Website
 
