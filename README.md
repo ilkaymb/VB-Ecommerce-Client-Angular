@@ -1,3 +1,23 @@
+Project UI Image
+![translate2](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/3d57aef3-b0b3-4902-9b36-c1fd7955d750)
+
+![ürünler sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/6aedee6c-0475-4cc0-9594-30961fdeeda0)
+
+![üye sayfası](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/0499f81e-9529-4bf5-8ce2-3cf3d9c862ee)
+
+![VB-E-Commerce (1)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/184757c9-25d1-4f89-8752-c3e9c7bfab23)
+
+![VB-E-Commerce (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/591a46d9-be80-4a83-8e6f-271c2966e6b1)
+
+![ürün ekleme](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/2c4a5295-d775-4b5b-9ddc-b0acab1ce3a9)
+
+![sepet (2)](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/a5539f07-7882-4b0d-928f-44e87ec63f29)
+
+![admin](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/8adc1af5-5770-454f-8b5b-4f349ce6a5d5)
+
+![sanal klavye](https://github.com/ilkaymb/VB-Ecommerce-Client-Angular/assets/73322500/0ef0c58a-0db3-4130-b142-11e70459e5e8)
+
+
 # AngularProject1
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
